@@ -1,31 +1,29 @@
-import React from 'react';
-import axios from "axios";
+import React from "react";
+import '../App.css';
+import 'antd/dist/antd.css';
+import {Layout, Menu, Breadcrumb} from 'antd';
+import Row from "antd/es/descriptions/Row";
+import Col from "antd/es/grid/col";
 
-class Login extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            user: "waiting..."
-        }
-    }
+const {Header, Content, Footer} = Layout;
 
-    componentDidMount() {
-        axios.get("http://127.0.0.1:8000/")
-            .then(res => {
-                this.setState({
-                    user: res.data.user
-                });
-                console.log(res.data);
-            });
-    }
+const Login = (props) => {
+    return (
+        <Layout className="layout">
+            <Header>
 
-    render() {
-        return (
-            <div>
-                {this.state.user}
-            </div>
-        );
-    }
-}
+            </Header>
+            <Content style={{padding: '0 50px'}}>
 
+                <div className="site-layout-content">Content
+                    <Row>
+                        <Col span={12}>col-12</Col>
+                        <Col span={12}>col-12</Col>
+                    </Row>
+                </div>
+            </Content>
+            <Footer style={{textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
+        </Layout>
+    );
+};
 export default Login;
