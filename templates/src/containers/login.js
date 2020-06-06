@@ -2,10 +2,8 @@ import React from "react";
 import '../App.css';
 import 'antd/dist/antd.css';
 import {Layout, Menu, Breadcrumb} from 'antd';
-import Row from "antd/es/descriptions/Row";
+import Row from "antd/es/grid/Row";
 import Col from "antd/es/grid/col";
-
-const {Header, Content, Footer} = Layout;
 
 const Login = (props) => {
     return (
