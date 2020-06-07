@@ -1,16 +1,245 @@
 @font-face {
-  font-family: 'IRANSans';
-  src: local('IRANSans'), url("./containers/fonts/IRANSans(FaNum).ttf") format("truetype");
+    font-family: 'IRANSans';
+    src: local('IRANSans'), url("./containers/fonts/IRANSans(FaNum).ttf") format("truetype");
 }
-.site-layout-content {
-  background: #fff;
-  padding: 24px;
-  min-height: 280px;
+
+body {
+    background-color: #F8FAFB;
+    font-family: IRANSans, serif !important;
 }
-#components-layout-demo-top .logo {
-  width: 120px;
-  height: 31px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px 24px 16px 0;
-  float: left;
+
+.ant-card-bordered {
+    border: unset;
+}
+
+.login-card {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    padding: 40px 0 40px 55px;
+    direction: rtl;
+    box-shadow: 0 0 10px 0 rgba(183, 192, 206, .2);
+    font-size: 11px;
+    min-width: 768px;
+    height: fit-content;
+}
+
+.login-card .ant-card-body {
+    padding: 0;
+}
+
+.login-card .ant-col:first-child img {
+    width: 110%;
+}
+
+.login-card .ant-col:last-child {
+    right: 15px;
+}
+
+.login-card h1 {
+    padding-right: 50px;
+    font-size: x-large;
+    font-weight: bold;
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.login-card .ant-form {
+    padding: 0 35px;
+}
+
+#components-form-demo-normal-login .login-form {
+    max-width: 300px;
+}
+
+#components-form-demo-normal-login .login-form-forgot {
+    float: right;
+}
+
+#components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
+    float: left;
+}
+
+#components-form-demo-normal-login .login-form-button {
+    width: 100%;
+}
+
+.login-card .ant-input-affix-wrapper {
+    height: 35px;
+}
+
+.login-card .ant-form-item {
+    margin-bottom: 15px;
+}
+
+.login-card .ant-input-affix-wrapper,
+.login-card .ant-input-affix-wrapper input {
+    background-color: #F8FAFB;
+    border: unset;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    padding: 0 15px 0 0;
+}
+
+.login-card .ant-input-prefix {
+    display: none;
+}
+
+.login-card .bi,
+.recover-pass-card .bi {
+    position: absolute;
+    z-index: 2;
+    top: 25%;
+    right: 2%;
+    font-size: 16px;
+}
+
+.login-card .ant-checkbox-inner {
+    border: unset;
+    background-color: #F8FAFB;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    width: 17px;
+}
+
+.login-card .ant-checkbox-inner::after {
+    position: relative;
+    top: 7px;
+    left: 4px;
+    width: 5px;
+    height: 11px;
+}
+
+.login-card .ant-checkbox-checked::after {
+    display: none;
+}
+
+.login-card .ant-checkbox-checked .ant-checkbox-inner::after {
+    border: 1px solid #fff;
+    border-top: 0;
+    border-left: 0;
+}
+
+.login-card .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #0081FF;
+}
+
+.login-card .ant-checkbox + span {
+    position: relative;
+    bottom: 2px;
+    font-size: 12px;
+}
+
+.login-card a {
+    float: left;
+    font-size: 12px;
+}
+
+.ant-btn-primary {
+    color: #FFFFFF;
+    background-color: #007BFF;
+    box-shadow: 0 5px 10px #007BFF16, 0 15px 40px #007BFF16;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+    color: #FFFFFF;
+    box-shadow: 0 2px 8px 0 #007BFF90;
+    background-color: #007BFF;
+    border: none;
+}
+
+.login-card button,
+.recover-pass-card button {
+    width: 100%;
+}
+
+.ant-form-item-has-error .ant-input, .ant-form-item-has-error .ant-input-affix-wrapper, .ant-form-item-has-error .ant-input:hover, .ant-form-item-has-error .ant-input-affix-wrapper:hover {
+    background-color: #F8FAFB;
+}
+
+.login-card .ant-form-item-explain, .ant-form-item-extra,
+.recover-pass-card .ant-form-item-explain, .ant-form-item-extra {
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.recover-pass-card {
+    width: 350px;
+    position: absolute;
+    height: 53%;
+    font-size: 11px;
+    top: 45%;
+    left: 35%;
+    transform: translate(0%, -45%);
+    -webkit-transform: translate(0%, -45%);
+    -moz-transform: translate(0%, -45%);
+    -o-transform: translate(0%, -45%);
+    border: none;
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    border-radius: 10px !important;
+    direction: rtl;
+    box-shadow: 0 0 10px 0 rgba(183, 192, 206, .2);
+}
+
+.recover-pass-card .ant-card-body {
+    padding: 0;
+}
+
+.recover-pass-card .ant-card-body > .ant-row:first-child {
+    display: grid;
+    border-bottom: 2px solid #ECEDF0;
+    margin: 20px 0;
+}
+
+.recover-pass-card img {
+    width: 100px;
+    margin: 15px auto;
+}
+
+.recover-pass-card h1 {
+    margin: 0 auto 15px auto;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.recover-pass-card form {
+    width: 100%;
+    padding: 0 40px;
+}
+
+.recover-pass-card form .ant-input {
+    border: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    background-color: #F8FAFB;
+    height: 35px;
+    padding: 0 25px 0 0;
+}
+
+.recover-pass-card .ant-form-item {
+    margin-bottom: 10px;
+}
+
+.recover-pass-card .ant-form-item:last-child {
+    margin-bottom: 0;
+}
+
+.recover-pass-card a {
+    font-size: 12px;
+    position: relative;
+    top: -3px;
+    margin: 0 auto;
+    display: table;
 }
