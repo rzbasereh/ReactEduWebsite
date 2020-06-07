@@ -1,14 +1,18 @@
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+# from rest_framework.permissions import IsAuthenticate
+from django.contrib.auth.models import User
 from rest_framework.views import APIView
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-
 from .models import Student, Teacher, Adviser, Manager
 from .serializers import StudentSerializer
 # from .forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
 
 class index(APIView):
@@ -19,7 +23,31 @@ class index(APIView):
             data = serialize_student.data
             return Response({"data": data}, status=status.HTTP_200_OK)
         except:
-            pass
+            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class StudentsList(generics.ListCreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+class EmailCheck(APIView):
+    @csrf_exempt
+    def post(self, request):
+        email = request.data.get('email')
+        if User.objects.filter(email=email).exists():
+            return Response({"exists": True}, status=status.HTTP_200_OK)
+        else:
+            return Response({"exists": False}, status=status.HTTP_200_OK)
+
+
+# class LoginPost(APIView):
+#     def post(self, request, *args, **kwargs):
+#         email = request.data.get('email')
+#         if User.objects.filter(email=email).exists():
+#             return Response({"exists": True}, status=status.HTTP_200_OK)
+#         else:
+#             return Response({"exists": False}, status=status.HTTP_200_OK)
 
 
 def loginPage(request):

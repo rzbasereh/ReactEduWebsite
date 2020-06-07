@@ -9,20 +9,10 @@ const {Header, Content, Footer} = Layout;
 
 const Login = (props) => {
     return (
-        <Layout className="layout">
-            <Header>
-
-            </Header>
-            <Content style={{padding: '0 50px'}}>
-                <div className="site-layout-content">Content
-                    <Row>
-                        <Col span={12}>col-12</Col>
-                        <Col span={12}>col-12</Col>
-                    </Row>
-                </div>
-            </Content>
-            <Footer style={{textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
-        </Layout>
+        <Row>
+            <Col span={12}>col-12</Col>
+            <Col span={12}>col-12</Col>
+        </Row>
     );
 };
 export default Login;
