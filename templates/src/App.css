@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'IRANSans';
-    src: local('IRANSans'), url("./containers/fonts/IRANSans(FaNum).ttf") format("truetype");
+    src: local('IRANSans'), url("fonts/IRANSans(FaNum).ttf") format("truetype");
 }
 
 body {
@@ -82,25 +82,33 @@ body {
 .login-card .ant-input-affix-wrapper,
 .login-card .ant-input-affix-wrapper input {
     background-color: #F8FAFB;
-    border: unset;
+    /*border-color: transparent;*/
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
-    padding: 0 15px 0 0;
+    /*padding: 0 15px;*/
 }
 
-.login-card .ant-input-prefix {
-    display: none;
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    /*-webkit-box-shadow: 0 0 0 30px white inset !important;*/
+    background-color: #F8FAFB;
 }
 
-.login-card .bi,
-.recover-pass-card .bi {
-    position: absolute;
-    z-index: 2;
-    top: 25%;
-    right: 2%;
-    font-size: 16px;
-}
+/*.login-card .ant-input-prefix {*/
+/*    display: none;*/
+/*}*/
+
+/*.login-card .bi,*/
+/*.recover-pass-card .bi {*/
+/*    position: absolute;*/
+/*    z-index: 2;*/
+/*    top: 25%;*/
+/*    right: 2%;*/
+/*    font-size: 16px;*/
+/*}*/
 
 .login-card .ant-checkbox-inner {
     border: unset;
@@ -148,6 +156,11 @@ body {
     color: #FFFFFF;
     background-color: #007BFF;
     box-shadow: 0 5px 10px #007BFF16, 0 15px 40px #007BFF16;
+}
+
+.ant-input-prefix {
+    margin-right: 0;
+    margin-left: 5px;
 }
 
 .ant-btn-primary:hover,
@@ -242,4 +255,9 @@ body {
     top: -3px;
     margin: 0 auto;
     display: table;
+}
+
+.ant-form-item-control-input .ant-form-item-children-icon {
+    right: auto !important;
+    left: 0;
 }

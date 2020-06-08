@@ -1,20 +1,20 @@
 import React from "react";
 import 'antd/dist/antd.css';
 import '../App.css';
-import {Button, Card, Checkbox, Form, Input} from 'antd';
+import {Button, Card, Form, Input} from 'antd';
 import Row from "antd/es/grid/row";
-import RecoverImg from "./img/RecoverPass.svg";
+import RecoverImg from "../img/RecoverPass.svg";
 import {Link} from "react-router-dom";
 
 
-const RecoverPassword = (props) => {
+const RecoverPassword = () => {
     const onFinish = values => {
         console.log('Received values of form: ', values);
     };
     return (
         <Card className="recover-pass-card">
             <Row>
-                <img src={RecoverImg}/>
+                <img src={RecoverImg} alt="Recover"/>
                 <h1>
                     بازیابی رمز عبور
                 </h1>
@@ -24,8 +24,7 @@ const RecoverPassword = (props) => {
                     name="normal_login"
                     className="login-form"
                     initialValues={{remember: true}}
-                    onFinish={onFinish}
-                >
+                    onFinish={onFinish}>
                     <Form.Item>
                         <svg className="bi bi-at" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +39,7 @@ const RecoverPassword = (props) => {
                         </Button>
                     </Form.Item>
                     <Form.Item>
-                        <Link to="/Login">
+                        <Link to="/login">
                             بازگشت به صفحه ی ورود
                         </Link>
                     </Form.Item>
