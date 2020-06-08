@@ -62,6 +62,28 @@ class Login extends React.Component {
 
     onFinish = values => {
         console.log('Received values of form: ', values);
+        let data = {
+            "username": "",
+            "password": ""
+        };
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+        axios.post("http://127.0.0.1:8000/token-auth/", JSON.stringify(data), {headers: headers})
+            .then(function (response) {
+                console.log(response.data)
+                // if (response.data.exists) {
+                //
+                //     console.log("success");
+                // } else {
+                //     self.setState({
+                //         emailStatus: "error"
+                //     });
+                // }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     };
 
     render() {
@@ -77,7 +99,7 @@ class Login extends React.Component {
                             name="normal_login"
                             className="login-form"
                             initialValues={{remember: true}}
-                            onFinish={this.onFinish()}>
+                            onFinish={this.onFinish}>
                             <Form.Item
                                 name="email"
                                 onChange={this.handleEmail}

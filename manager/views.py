@@ -51,7 +51,7 @@ def addUser(request):
             return JsonResponse({"error": "Duplicate user"})
         alphabet = string.ascii_letters + string.digits
         password = ''.join(secrets.choice(alphabet) for i in range(20))
-        username = f2p("reza")
+        username = f2p("Documents")
         return JsonResponse({"success": username})
         user = User.objects.create_user(username, email, password)
         user.first_name = first_name

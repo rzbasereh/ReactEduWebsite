@@ -12,7 +12,6 @@ from .serializers import StudentSerializer
 # from .forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
-from django.views.decorators.csrf import csrf_exempt
 
 
 class index(APIView):
@@ -32,7 +31,6 @@ class StudentsList(generics.ListCreateAPIView):
 
 
 class EmailCheck(APIView):
-    @csrf_exempt
     def post(self, request):
         email = request.data.get('email')
         if User.objects.filter(email=email).exists():
@@ -41,13 +39,21 @@ class EmailCheck(APIView):
             return Response({"exists": False}, status=status.HTTP_200_OK)
 
 
-# class LoginPost(APIView):
-#     def post(self, request, *args, **kwargs):
+# class LoginRequest(APIView):
+#     def post(self, request):
 #         email = request.data.get('email')
-#         if User.objects.filter(email=email).exists():
-#             return Response({"exists": True}, status=status.HTTP_200_OK)
+#         password = request.data.get('password')
+#         username = User.objects.get(email=email)
+#         remember_token = request.data.get('remember', None)
+#         user = authenticate(username=username, password=password)
+#         if user is not None:
+#             print(request.data)
+#             login(request.data, user)
+#             if not remember_token:
+#                 request.session.set_expiry(0)
+#             return Response({'data': "success"})
 #         else:
-#             return Response({"exists": False}, status=status.HTTP_200_OK)
+#             return Response({"data": "رمز عبور خود را به درستی وارد کنید!"}, status=status.HTTP_200_OK)
 
 
 def loginPage(request):

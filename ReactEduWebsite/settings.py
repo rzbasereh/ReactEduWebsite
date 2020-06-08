@@ -35,14 +35,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'corsheaders',
+    'rest_auth.registration',
+    'rest_auth',
+    'rest_framework',
+    'rest_framework.authtoken',
+
     'main.apps.MainConfig',
     'student.apps.StudentConfig',
     'teacher.apps.TeacherConfig',
     'manager.apps.ManagerConfig',
     'adviser.apps.AdviserConfig'
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -125,6 +136,10 @@ STATIC_DIR = (
     os.path.join(BASE_DIR, 'templates', 'build', 'static')
 )
 
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'main.utils.custom_jwt_response_handler'
+}
+
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
@@ -143,3 +158,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 # CORS_ORIGIN_WHITELIST = (
 #     'localhost:3000',
 # )
+
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_AUTHENTICATION_METHOD = "username"
+ACCOUNT_EMAIL_REQUIRED = False
