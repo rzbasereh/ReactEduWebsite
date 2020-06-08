@@ -9,17 +9,30 @@ import {connect} from "react-redux"
 import Login from "./containers/login";
 import * as actions from './store/actions/auth';
 import RecoverPassword from "./containers/RecoverPassword";
+import IndexLayout from "./containers/index_layout";
 
+class App extends React.Component {
+    componentDidMount() {
+        this.props.onTryAutoSignup();
+    }
 
-function App() {
-    return (
-        <div>
-            <Router>
-                <Route path='/login' {...this.props}><Login/></Route>
-                <Route path='/RecoverPassword'><RecoverPassword/></Route>
-            </Router>
-        </div>
-    );
+    render() {
+        return (
+            <div>
+                <Router>
+                    <Route exact path='/'>
+                        <IndexLayout {...this.props}/>
+                    </Route>
+                    <Route path='/login'>
+                        <Login/>
+                    </Route>
+                    <Route path='/RecoverPassword'>
+                        <RecoverPassword/>
+                    </Route>
+                </Router>
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = state => {
@@ -27,5 +40,12 @@ const mapStateToProps = state => {
         isAuthenticated: state.token !== null
     }
 };
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onTryAutoSignup: () => dispatch(actions.authCheckState())
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
