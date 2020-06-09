@@ -6,7 +6,7 @@ import Col from "antd/es/grid/col";
 import Row from "antd/es/grid/row";
 import {Card} from 'antd';
 import {Form, Input, Button, Checkbox} from 'antd';
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import axios from 'axios';
 import {connect} from 'react-redux';
 import * as actions from '../store/actions/auth';
@@ -35,7 +35,7 @@ class Login extends React.Component {
             });
         } else if (emailRegex.test(e.target.value)) {
             let data = {
-                "email": e.target.value
+                email: e.target.value
             };
             let self = this;
             axios.post("http://127.0.0.1:8000/api/login/check/", data)
@@ -63,9 +63,8 @@ class Login extends React.Component {
     };
 
     onFinish = values => {
-        console.log('Received values of form: ', values);
-        this.props.onAuth(values.username, values.password);
-        this.props.history.push('/');
+        // console.log('Received values of form: ', values);
+        this.props.onAuth(values.email, values.password);
         // let data = {
         //     "username": "",
         //     "password": ""
@@ -101,6 +100,12 @@ class Login extends React.Component {
         }
         return (
             <Card className="login-card">
+                {
+                    this.props.isAuthenticated ?
+                        this.props.history.push("/" + this.props.user)
+                        :
+                        ""
+                }
                 <Row>
                     <Col span={12}>
                         <img src={LoginImg} alt="Login"/>
@@ -113,7 +118,7 @@ class Login extends React.Component {
                             initialValues={{remember: true}}
                             onFinish={this.onFinish}>
                             <Form.Item
-                                name="username"
+                                name="email"
                                 onChange={this.handleEmail}
                                 hasFeedback
                                 validateStatus={this.state.emailStatus}
@@ -125,7 +130,6 @@ class Login extends React.Component {
                                               d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                                     </svg>
                                 }
-                                       type="text"
                                        placeholder="رایانامه"/>
                             </Form.Item>
                             <Form.Item
@@ -165,21 +169,26 @@ class Login extends React.Component {
                     </Col>
                 </Row>
             </Card>
-        );
+        )
+            ;
     }
 }
 
 const mapStateToProps = (state) => {
     return {
         loading: state.loading,
-        error: state.error
+        error: state.error,
+        isAuthenticated: state.token !== null,
+        user: state.user
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (username, password) => dispatch(actions.authLogin(username, password))
+        onAuth: (email, password) => {
+            dispatch(actions.authLogin(email, password));
+        }
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

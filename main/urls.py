@@ -7,8 +7,8 @@ urlpatterns = [
     # path('login/', views.loginPage, name="login"),
     # path('logout/', views.logoutUser, name="logout"),
     # path('recover-pass/', views.recoverPassword, name="recoverPassword"),
-    # path('login_request/', views.LoginRequest.as_view(), name="login"),
-    path('login/check/', views.EmailCheck.as_view(), name="check_email"),
+    path('auth/', views.login, name="auth"),
+    path('login/check/', views.check_email, name="check_email"),
     # path('notFound/', views.notFound, name="notFound"),
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)
