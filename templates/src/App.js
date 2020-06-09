@@ -5,16 +5,18 @@ import {
     BrowserRouter as Router,
     Route
 } from "react-router-dom";
-import {connect} from "react-redux"
+import {connect} from "react-redux";
 import Login from "./containers/login";
 import * as actions from './store/actions/auth';
 import RecoverPassword from "./containers/RecoverPassword";
 import IndexLayout from "./containers/index_layout";
+import Base_layout from "./containers/base_layout";
 
 class App extends React.Component {
     componentDidMount() {
         this.props.onTryAutoSignup();
     }
+
 
     render() {
         return (
@@ -28,6 +30,9 @@ class App extends React.Component {
                     </Route>
                     <Route path='/RecoverPassword'>
                         <RecoverPassword/>
+                    </Route>
+                    <Route path='/base_layout'>
+                        <Base_layout/>
                     </Route>
                 </Router>
             </div>
@@ -48,4 +53,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-

@@ -147,7 +147,7 @@ input:-webkit-autofill:active {
     font-size: 12px;
 }
 
-.login-card a {
+.login-card .login-form-forgot {
     float: left;
     font-size: 12px;
 }
@@ -260,4 +260,85 @@ input:-webkit-autofill:active {
 .ant-form-item-control-input .ant-form-item-children-icon {
     right: auto !important;
     left: 0;
+}
+#components-layout-demo-custom-trigger .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+.site-layout .site-layout-background {
+    background: #fff;
+}
+
+.ant-layout.ant-layout-has-sider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    direction: rtl;
+}
+.site-layout,
+.site-layout .site-layout-background {
+    background-color: #F8FAFB;
+}
+.ant-layout-header {
+    background-color: #fff !important;
+}
+.ant-layout-sider {
+    padding-top: 60px;
+    border-left: 1px solid #B0BBC680;
+}
+.ant-layout-sider ul {
+    text-align: right;
+    direction: ltr;
+    color: #8697A8;
+}
+
+.ant-layout-sider .ant-menu-submenu-vertical > .ant-menu-submenu-title .ant-menu-submenu-arrow, .ant-menu-submenu-vertical-left > .ant-menu-submenu-title .ant-menu-submenu-arrow, .ant-menu-submenu-vertical-right > .ant-menu-submenu-title .ant-menu-submenu-arrow, .ant-menu-submenu-inline > .ant-menu-submenu-title .ant-menu-submenu-arrow {
+position: relative;
+    right: 60px;
+}
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: #F8FAFB;
+    color:#44566C;
+}
+.ant-layout-sider .ant-menu-inline .ant-menu-item::after {
+    border-right: 5px solid #0081FF;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+}
+.ant-layout-sider .ant-menu-inline .ant-menu-item,
+.ant-layout-sider .ant-menu-submenu-title {
+    font-weight: bold;
+    padding-right: 20px;
+    direction: rtl;
+}
+.ant-layout-sider li:hover,
+.ant-layout-sider .ant-menu-submenu-title:hover{
+    background-color: #F8FAFB;
+    color:#44566C!important;
+}
+.ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before,
+.ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after {
+    background: linear-gradient(to right, #44566C, #44566C);
+}
+.ant-layout-sider .bi {
+    font-size: 18px;
+    position: relative;
+    top: 5px;
+    margin-left: 10px;
 }
