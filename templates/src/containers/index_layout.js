@@ -1,6 +1,6 @@
 import React from 'react';
 import * as actions from '../store/actions/auth';
-import {Form, Input, Button, Checkbox} from 'antd';
+import {Button} from 'antd';
 import {Link, withRouter} from "react-router-dom";
 import {connect} from 'react-redux';
 

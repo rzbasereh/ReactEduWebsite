@@ -1,9 +1,11 @@
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 # from rest_framework.permissions import IsAuthenticate
 from django.contrib.auth.models import User
+from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
 from rest_framework import status
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
@@ -12,6 +14,9 @@ from .serializers import StudentSerializer
 # from .forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from django.views.decorators.csrf import csrf_exempt
 
 
 class index(APIView):
@@ -30,30 +35,39 @@ class StudentsList(generics.ListCreateAPIView):
     serializer_class = StudentSerializer
 
 
-class EmailCheck(APIView):
-    def post(self, request):
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((AllowAny,))
+def check_email(request):
+    email = request.data.get('email')
+    if User.objects.filter(email=email).exists():
+        return Response({"exists": True}, status=status.HTTP_200_OK)
+    else:
+        return Response({"exists": False}, status=status.HTTP_200_OK)
+
+
+class Authentication(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        valid_user = serializer.validated_data['user']
         email = request.data.get('email')
-        if User.objects.filter(email=email).exists():
-            return Response({"exists": True}, status=status.HTTP_200_OK)
+        password = request.data.get('password')
+        username = User.objects.get(email=email)
+        remember_token = bool(request.data.get('remember', None))
+        print(username)
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            print(request.data)
+            login(request.data, user)
+            token = Token.objects.get_or_create(user=valid_user)
+            print(token.key)
+            if not remember_token:
+                request.session.set_expiry(0)
+            return Response({'user': userType(user), 'token': "ff"})
         else:
-            return Response({"exists": False}, status=status.HTTP_200_OK)
-
-
-# class LoginRequest(APIView):
-#     def post(self, request):
-#         email = request.data.get('email')
-#         password = request.data.get('password')
-#         username = User.objects.get(email=email)
-#         remember_token = request.data.get('remember', None)
-#         user = authenticate(username=username, password=password)
-#         if user is not None:
-#             print(request.data)
-#             login(request.data, user)
-#             if not remember_token:
-#                 request.session.set_expiry(0)
-#             return Response({'data': "success"})
-#         else:
-#             return Response({"data": "رمز عبور خود را به درستی وارد کنید!"}, status=status.HTTP_200_OK)
+            return Response({"data": "رمز عبور خود را به درستی وارد کنید!"}, status=status.HTTP_200_OK)
 
 
 def loginPage(request):
@@ -75,26 +89,23 @@ def recoverPassword(request):
     return render(request, 'main/recoverPassword.html', {})
 
 
-def LoginPost(request):
-    if request.method == 'POST':
-        pass
-        # form = LoginForm(request.POST)
-        # if form.is_valid():
-        #     email = request.POST.get('email')
-        #     password = request.POST.get('password')
-        #     remember_token = request.POST.get('remember_me', None)
-        #     user = authenticate(request, username=email, password=password)
-        #     print(user)
-        #     print(remember_token)
-        #     if user is not None:
-        #         login(request, user)
-        #         if not remember_token:
-        #             request.session.set_expiry(0)
-        #         return JsonResponse({'url': reverse('index') + userType(user)})
-        # else:
-        #     return JsonResponse({'form-errors': form.errors})
-    else:
-        return JsonResponse({'Error'})
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((AllowAny,))
+def login(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+    username = User.objects.get(email=email)
+    if username is None or password is None:
+        return Response({'error': 'Please provide both username and password'},
+                        status=status.HTTP_400_BAD_REQUEST)
+    user = authenticate(username=username, password=password)
+    if not user:
+        return Response({'error': 'Invalid Credentials'},
+                        status=status.HTTP_404_NOT_FOUND)
+    token, _ = Token.objects.get_or_create(user=user)
+    return Response({'token': token.key, 'user': userType(user)},
+                    status=status.HTTP_200_OK)
 
 
 def userType(user):

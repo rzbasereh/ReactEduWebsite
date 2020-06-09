@@ -213,8 +213,267 @@ Then create our store:
 #Part 3
 https://youtu.be/W7QrpfV3BO0
 
+## Middleware
+Middlewares are add-on functionality that we can 
+add to our project and play roll such as third party 
+and on any change do some thing. 
+
+First of all we want install `redux-logger` to log the data in the middleware:
+    
+    npm install redux-logger
+Then import this package to our project:
+    
+    const reduxLogger = require('redux-logger');
+Now we should create logger function:
+    
+    const logger = reduxLogger.createLogger();
+Now create *applyMiddleware* for add middleware ability to our project:
+    
+    const applyMiddleware = redux.applyMiddleware;
+Now we can add middleware to our store:
+    
+    const store = createStore(rootReducer, applyMiddleware(logger));
+Now if any change occur in our store, middleware running.
+## Async Action
+
+Often when we want to get data from an api we use this in our project.
+
+our *initialState* is structure such as below:
+    
+    initialState = {
+        loading : true, false,
+        users : [],
+        error : ''
+    }
+* `loading` : show loading/unloading status
+* `users` : our data that we get from the api
+* `error` : show our error in the process of Async Action.
+
+Now we want to create three action for this states:
+    
+    FETCH_USERS_REQUEST
+    FETCH_DATA_SUCCESS
+    FETCH_DATA_FAILURE
+And create actions arrow functions:
+    
+    const fetchUsersRequest = () => {
+        return  {
+            type : FETCH_USERS_REQUEST
+        }
+    }
+    const fetchDataSuccess = users => {
+        return  {
+            type : FETCH_DATA_SUCCESS,
+            payload : users
+        }
+    }
+    const fetchDataFailure = error => {
+        return  {
+            type : FETCH_DATA_FAILURE,
+            payload : error
+        }
+    }
+* instead of `payload` we can put any key, it just for 
+access to `users` in reducers.
+
+ 
+And create our reducer:
+    
+    ...
+        switch(action.type) {
+            case FETCH_USERS_REQUEST: 
+                return {
+                    ...state,
+                    loading : true
+                }
+            case FETCH_DATA_SUCCESS:
+                return {
+                    loading : false,
+                    users = action.payload
+                    error : ""
+                }
+            case FETCH_DATA_FAILURE:
+                retuen {
+                loading : false,
+                users : [],
+                error : action.payload
+            }
+        }
+    ...
+
+And create our store:
+    
+    const store = createStore(reducer);
+this actions are Sync Actions for have Async Actions 
+we should Know about Thunk Middleware.
+## Thunk Middleware
+First install two package:
+    
+    npm install axios redux-thunk
+Now import applyMiddleware, thunkMiddleware, axios to our project:
+    
+    const thunkMiddleware = require('redux-thunk').default;
+    const axios = require('axios');
+    const applyMiddleware = redux.applyMiddleware;
+
+Now create our Async Actions Creators:
+    
+    const fetchUsers = () => {
+        return function(dispatch) {
+            axios.get('http://fakerestapi.azurewebsites.net/api/Users')
+                .then(Response => {
+                   const users = Response.data.map(user => user.ID);
+                   dispatch(fetchDataSuccess(users)); 
+                })
+                .catch(error => {
+                    dispatch(fetchDataFailure(error.message));
+                });
+        }
+    }
+* using `dispatch` as function input to call other functions
+in this Action Creator.
+
+* http://fakerestapi.azurewebsites.net : this is a free website 
+to get fake data to test our project.
+
+And add this middleware to our store:
+    
+    const store = creatrStore(reducer, applyMiddleware(thunkMiddleware));
+And create our listener:
+    
+    store.subscribe( () => { console.log(store.getData()) } )
+And start requesting:
+    
+    store.dispatch(fetchUsers());
+# Installing React-Redux
+First create our react app:
+    
+    create-react-app react-redux1
+Then install *redux* and *react-redux* dependencies:
+    
+    npm install redux react-redux
+Now in *components* directory create *mobContainers.js*:
+    
+    import React from 'react';
+    
+    const mobContainer = () => {
+        retuen(
+            <div>
+                <h1>Number of Mobiles</h1>
+                <button>Buy</button>
+            </div>
+        );
+    }
+    
+    export default mobContainer;
+* for fast creating this structure in *vscode* we can use 
+*React code snippet* extension.
+Then add this container to *App.js*.
+
 #Part 4
 https://youtu.be/3lPjYiyD9VE
+
+Action -> Reducer -> Redux Store
+        State -> React App -> Dispatch
+
+First create *redux* directory in *src*, and create 
+*mob* directory in the *src/redux* path 
+and add file *mobTypes.js* and define our action types here:
+    
+    export const BUY_MOB = 'BUY_MOB';
+Then add file *mobActions.js* to *src/redux* path and create Actions 
+and Action Creators in it.
+    
+    import {BUY_MOB} from './mobTypes';
+    
+    export const buyMob = () => {
+        return {
+            type : BUY_MOB
+        } 
+    }
+now create our reducer file as *mobReducer.js* in *src/redux/mob/* path:
+    
+    import {BUY_MOB} from './mobTypes';
+    
+    const initialState = {
+        numOgMobs : 
+    }
+    
+    const mobReducer = (state = initialState, action) => {
+        switch(action.type) {
+            case BUY_MOB: 
+                return {
+                    ...state,
+                    numOfMobs : state.numOfMobs - 1 
+                }
+            default: return state
+        }    
+    }
+    
+    export default mobReducer;
+Now create *store.js* file in *redux* dir:
+    
+    import {createStore} from 'redux';
+    import mobReducer from './mob/mobReducer';
+    
+    const store = createStore(mobReducer);
+    
+    export default store;
+Now connecting our app to redux, first import *Provider* to *App.js* 
+for accessible store in all components. 
+    
+    ...
+    import {Provider} from 'react-redux';
+    import store from './redux/store/;
+    ...
+    ...
+    function App() {
+        return (
+            <Provider store={store}>
+                <div className="App">
+                    <MobContainer />
+                </div>
+            </Provider>
+        );
+    }
+Now for simplify accessibility to all Actions create an *index.js*
+file in *redux* dir and import all Actions:
+    
+    export { buyMob } from './mob/mobActions';
+Now *mobContainer* can access to our Store but can not 
+access to *Dispatch* and *State*, therefor in this file we have: 
+    
+    import React from 'react';
+    import {buyMob} from '../redux';
+    import { connect } from 'react-redux';
+    
+    const mobContainer = (props) => {
+        retuen(
+            <div>
+                <h1>Number of Mobiles - {props.numOfMobs}</h1>
+                <button onClick(props.buyMob)>Buy</button>
+            </div>
+        );
+    }
+    
+    const mapStateToProps = state => {
+        return {
+            numOfMobs: state.numOfMobs
+        }
+    }
+    
+    const mapDispatchToProps = dispatch => {
+        return{
+            buyMob: () => dispatch(buyMob());
+        }
+    }
+    
+    
+    export default connect(mapStateToProps, mapDispatchToProps)(mobContainer);
+* `mapStateToProps` : with this function we can access to 
+our states as props.
+
+continue => 36:30
 
 #Part 5
 https://youtu.be/DB_BwHnQ0Ro
