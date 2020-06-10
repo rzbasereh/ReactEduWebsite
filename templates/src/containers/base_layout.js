@@ -122,12 +122,14 @@ class BaseLayout extends React.Component {
                                     </Button>
                                 </Popover>
                                 <Avatar icon={<UserOutlined/>}/>
-                                <Popover content={EventContent}  title='رویداد ها' trigger="click" placement="bottomRight">
-                                    <Button className='bell'><BellIcon/></Button>
+                                <Popover content={EventContent} title='رویداد ها' trigger="click">
+                                    <Button className='bell'><BellIcon/>
+                                        <Badge status="processing"/>
+                                    </Button>
                                 </Popover>
-                                <Popover content={MassageContent} title='پیام ها' trigger="click" placement="bottomRight">
-                                    <Button><EnvelopeIcon />
-                                    <Badge status="processing" />
+                                <Popover content={MassageContent} title='پیام ها' trigger="click">
+                                    <Button><EnvelopeIcon/>
+                                        <Badge status="processing"/>
                                     </Button>
                                 </Popover>
                             </Col>
