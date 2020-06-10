@@ -12,6 +12,7 @@ import RecoverPassword from "./containers/RecoverPassword";
 import IndexLayout from "./containers/index_layout";
 import Base_layout from "./containers/base_layout";
 
+
 class App extends React.Component {
     componentDidMount() {
         this.props.onTryAutoSignup();

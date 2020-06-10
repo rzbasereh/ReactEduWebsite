@@ -152,7 +152,7 @@ input:-webkit-autofill:active {
     font-size: 12px;
 }
 
-.ant-btn-primary {
+.login-card .ant-btn-primary {
     color: #FFFFFF;
     background-color: #007BFF;
     box-shadow: 0 5px 10px #007BFF16, 0 15px 40px #007BFF16;
@@ -163,8 +163,8 @@ input:-webkit-autofill:active {
     margin-left: 5px;
 }
 
-.ant-btn-primary:hover,
-.ant-btn-primary:focus {
+.login-card .ant-btn-primary:hover,
+.login-card .ant-btn-primary:focus {
     color: #FFFFFF;
     box-shadow: 0 2px 8px 0 #007BFF90;
     background-color: #007BFF;
@@ -293,17 +293,18 @@ input:-webkit-autofill:active {
 .site-layout .site-layout-background {
     background-color: #F8FAFB;
 }
-.ant-layout-header {
-    background-color: #fff !important;
-}
+
 .ant-layout-sider {
     padding-top: 60px;
     border-left: 1px solid #B0BBC680;
+    direction: ltr;
+    overflow-x: hidden;
 }
 .ant-layout-sider ul {
     text-align: right;
     direction: ltr;
     color: #8697A8;
+    border: none;
 }
 
 .ant-layout-sider .ant-menu-submenu-vertical > .ant-menu-submenu-title .ant-menu-submenu-arrow, .ant-menu-submenu-vertical-left > .ant-menu-submenu-title .ant-menu-submenu-arrow, .ant-menu-submenu-vertical-right > .ant-menu-submenu-title .ant-menu-submenu-arrow, .ant-menu-submenu-inline > .ant-menu-submenu-title .ant-menu-submenu-arrow {
@@ -337,8 +338,210 @@ position: relative;
     background: linear-gradient(to right, #44566C, #44566C);
 }
 .ant-layout-sider .bi {
-    font-size: 18px;
+    font-size: 19px;
     position: relative;
     top: 5px;
     margin-left: 10px;
+}
+.ant-layout-sider .ant-menu-inline-collapsed > .ant-menu-item .anticon {
+    position: relative;
+    right: 5px;
+}
+.ant-menu-inline-collapsed > .ant-menu-item {
+        margin-right: 15px;
+    margin-left: 15px;
+    border-radius: 10px;
+    padding: 0 11px;
+}
+.ant-layout-sider-collapsed .ant-menu-submenu {
+    margin: 4px 15px 8px 15px;
+        border-radius:10px ;
+
+}
+.ant-layout-sider-collapsed .ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title {
+    padding: 0 15px ;
+    margin: 0;
+        border-radius:10px ;
+
+}
+.ant-layout-sider .ant-menu-sub > li {
+    padding-right: 70px!important;
+}
+.ant-menu-submenu-selected {
+    color: #8697A8;
+}
+.ant-menu-vertical .ant-menu-submenu-selected {
+    color: #44566C;
+    background-color: #F8FAFB;
+}
+.ant-menu-item-active:hover {
+    color: #44566C;
+    background-color: #F8FAFB;
+}
+.ant-menu-item-only-child,
+.ant-menu-item {
+    color: #8697A8;
+}
+.ant-menu-item:hover, .ant-menu-item-active, .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .ant-menu-submenu-active, .ant-menu-submenu-title:hover {
+    color: #44566C;
+}
+.ant-layout-header {
+    background-color: #fff !important;
+    border-bottom: 1px solid #B0BBC680;
+}
+.ant-layout-header  .trigger {
+    margin: 20px 15px;
+}
+.ant-layout-header .bi-filter-right {
+    font-size: 25px;
+}
+.ant-layout-header .ant-input-search {
+    width:200px;
+    direction: ltr;
+    margin-top: 15px;
+}
+.ant-layout-header .ant-btn-primary {
+    background-color: #F8FAFB;
+    box-shadow: none;
+    border: none;
+    color: #44566C;
+}
+
+.ant-layout-header .ant-input-group .ant-input {
+    border: none;
+    background-color: #F8FAFB;
+    font-size: 12px;
+    direction: rtl;
+    height: 32px;
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+}
+.ant-layout-header .ant-input-group .ant-btn {
+    font-size: 16px;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+.ant-layout-header .ant-input-group .ant-btn:after {
+    display: none;
+}
+.ant-layout-header .ant-input-search-enter-button input + .ant-input-group-addon {
+    border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.ant-input:focus, .ant-input-focused {
+    box-shadow: none;
+}
+.ant-layout-header .ant-col:last-child {
+    direction: ltr;
+    padding-left: 30px;
+}
+.bell {
+    margin-left: 35px;
+}
+.bell:after {
+        content: '';
+    border: 1px solid #44566C60;
+    height: 50px;
+    position: absolute;
+    bottom: -7px;
+    left: -13px;
+    z-index: 1000000;
+}
+.ant-layout-header .ant-col:last-child  button:first-child {
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    margin-right: 5px;
+    direction: rtl;
+    min-width: 100px;
+    color: #8697A8;
+}
+
+.ant-layout-header .ant-col:last-child button:not(:first-child) {
+    padding: 0 10px;
+    border: 0;
+    box-shadow: none;
+    position: relative;
+    top: 5px;
+    margin-right: 10px;
+}
+.ant-layout-header .ant-col:last-child button:not(:first-child) svg {
+    font-size: 23px;
+    color: #8697A8;
+}
+.ant-layout-header .ant-col:last-child button:hover {
+    color: #44566C;
+}
+.ant-layout-header .ant-avatar {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    line-height: 50px;
+    background-color: #F8FAFB;
+    color: #44566C80;
+}
+.ant-layout-header .ant-col:last-child > button:first-child .anticon {
+    margin-right: 10px;
+    position: relative;
+    top: 2px;
+}
+a.ant-typography, .ant-typography a {
+    color: #8697A8;
+}
+a.ant-typography:hover, .ant-typography a:hover {
+    color: #44566C;
+}
+.ant-avatar.ant-avatar-icon > .anticon {
+    font-size: x-large;
+    position: relative;
+    top: 3px;
+}
+.ant-popover-content {
+    text-align: right;
+}
+[ant-click-animating-without-extra-node='true']::after, .ant-click-animating-node {
+    display: none;
+}
+.notification-indicator {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 100%;
+    z-index: 0;
+}
+.notification-indicator-primary {
+    background: #4d8af0;
+}
+/*.notification-indicator.notification-indicator-ripple:before {*/
+/*    content: "";*/
+/*    display: block;*/
+/*    width: 26px;*/
+/*    height: 26px;*/
+/*    z-index: -1;*/
+/*    position: absolute;*/
+/*    top: -9px;*/
+/*    left: -9px;*/
+/*    border-radius: 100%;*/
+/*    opacity: 0;*/
+/*    -webkit-transform-origin: 50% 50%;*/
+/*    transform-origin: 50% 50%;*/
+/*    mix-blend-mode: screen;*/
+/*    -webkit-animation: ripple 1.2s ease-out;*/
+/*    animation: ripple 1.2s ease-out;*/
+/*    -webkit-animation-iteration-count: infinite;*/
+/*    animation-iteration-count: infinite;*/
+/*}*/
+/*.notification-indicator-primary:before {*/
+/*    content: "";*/
+/*    background: rgba(77,138,240,.5);*/
+/*}*/
+.ant-layout-header .ant-badge-status-dot {
+    top: -12px;
+    left: -12px;
+    width: 8px;
+    height: 8px;
+    background-color: #FF3D57;
 }
