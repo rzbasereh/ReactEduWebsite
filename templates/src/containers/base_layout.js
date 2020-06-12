@@ -1,39 +1,21 @@
 import React, {Component} from "react";
 import 'antd/dist/antd.css';
 import '../App.css';
-import {Layout, Menu, Dropdown, Avatar, Row, Col, Button, Popover, Badge} from 'antd';
+import {Layout, Menu, Avatar, Row, Col, Button, Popover, Badge} from 'antd';
 import {UserOutlined} from '@ant-design/icons';
 import {
-    DashboardSvg,
-    ClassSvg,
-    ReportSvg,
-    ExamSvg,
-    ChatSvg,
-    OpenSidebarSvg,
-    EnvelopeSvg,
-    BellSvg,
-    ChevronDownSvg
+    OpenSidebarIcon,
+    EnvelopeIcon,
+    BellIcon,
+    ChevronDownIcon, DashboardIcon, ClassIcon, ReportIcon, ExamIcon, ChatIcon
 } from "../componenets/icons";
 import Icon from "@ant-design/icons";
 import Search from "antd/es/input/Search";
 import Link from "antd/lib/typography/Link";
+import SidebarItems from "../componenets/sider-menu"
+import SubMenu from "antd/es/menu/SubMenu";
 
-// page-layout
 const {Header, Sider, Content} = Layout;
-
-// submenu
-const {SubMenu} = Menu;
-
-// icons
-const DashboardIcon = props => <Icon component={DashboardSvg} {...props} />;
-const ClassIcon = props => <Icon component={ClassSvg} {...props} />;
-const ReportIcon = props => <Icon component={ReportSvg} {...props} />;
-const ExamIcon = props => <Icon component={ExamSvg} {...props} />;
-const ChatIcon = props => <Icon component={ChatSvg} {...props} />;
-const OpenSidebarIcon = props => <Icon component={OpenSidebarSvg} {...props} />;
-const EnvelopeIcon = props => <Icon component={EnvelopeSvg} {...props} />;
-const BellIcon = props => <Icon component={BellSvg} {...props} />;
-const ChevronDownIcon = props => <Icon component={ChevronDownSvg} {...props} />;
 
 const UserContent = (
     <div>
@@ -51,13 +33,7 @@ const MassageContent = (
     </div>
 );
 
-// const Notification =() => (
-//     <span className='notification-indicator notification-indicator-primary notification-indicator-ripple'>
-//     </span>
-// );
-class BaseLayout extends React.Component {
-
-
+class base_layout extends React.Component {
     state = {
         collapsed: false,
         mode: 'inline',
@@ -72,39 +48,7 @@ class BaseLayout extends React.Component {
     render() {
         return (
             <Layout>
-                <Sider trigger={null} collapsible collapsed={this.state.collapsed} theme={"light"}>
-                    <div className="logo"/>
-                    <Menu
-                        mode={this.state.mode}
-                        theme={this.state.theme}
-                        defaultSelectedKeys={['1']}
-                    >
-                        <Menu.Item key="1"
-                                   icon={<DashboardIcon/>}>
-
-                            <span>داشبورد</span>
-                        </Menu.Item>
-                        <Menu.Item key="2"
-                                   icon={<ClassIcon/>}>
-                            <span>کلاس ها</span>
-                        </Menu.Item>
-                        <Menu.Item key="3"
-                                   icon={<ReportIcon/>}>
-                            <span>گزارش ها</span>
-                        </Menu.Item>
-                        <SubMenu key="sub1" title="آزمون ها"
-                                 icon={<ExamIcon/>}>
-                            <Menu.Item key="4"><span>کارنامه آزمون</span>
-                            </Menu.Item>
-                            <Menu.Item key="5"> <span>آزمون آنلاین</span>
-                            </Menu.Item>
-                        </SubMenu>
-                        <Menu.Item key="6"
-                                   icon={<ChatIcon/>}>
-                            <span>گفت و گو</span>
-                        </Menu.Item>
-                    </Menu>
-                </Sider>
+                <SidebarItems/>
                 <Layout className="site-layout">
                     <Header className="site-layout-background" style={{padding: 0}}>
                         <Row>
@@ -149,4 +93,5 @@ class BaseLayout extends React.Component {
     }
 }
 
-export default BaseLayout;
+
+export default base_layout;

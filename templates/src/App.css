@@ -357,6 +357,10 @@ input:-webkit-autofill:active {
     top: 7px;
 }
 
+.ant-layout-sider-collapsed .bi-check-square {
+    top: 5px;
+}
+
 .ant-layout-sider .ant-menu-inline-collapsed > .ant-menu-item .anticon {
     position: relative;
     right: 5px;
@@ -508,7 +512,7 @@ input:-webkit-autofill:active {
 }
 
 .ant-layout-header .ant-col:last-child button:not(:first-child) svg {
-    font-size: 23px;
+    font-size: 20px;
     color: #8697A8;
 }
 
@@ -554,7 +558,7 @@ a.ant-typography:hover, .ant-typography a:hover {
 }
 
 .ant-layout-header .ant-badge-status-dot {
-    top: -12px;
+    top: -10px;
     left: -12px;
     width: 8px;
     height: 8px;
