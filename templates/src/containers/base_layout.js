@@ -48,7 +48,9 @@ class BaseLayout extends React.Component {
     render() {
         return (
             <Layout>
-                <SidebarItems/>
+                <Sider trigger={null} collapsible collapsed={this.state.collapsed} theme={"light"}>
+                    <SidebarItems/>
+                </Sider>
                 <Layout className="site-layout">
                     <Header className="site-layout-background" style={{padding: 0}}>
                         <Row>
@@ -84,8 +86,7 @@ class BaseLayout extends React.Component {
                         style={{
                             margin: '24px 16px',
                             minHeight: 280,
-                        }}
-                    >
+                        }}>
                     </Content>
                 </Layout>
             </Layout>
