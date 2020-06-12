@@ -10,7 +10,7 @@ import Login from "./containers/login";
 import * as actions from './store/actions/auth';
 import RecoverPassword from "./containers/RecoverPassword";
 import IndexLayout from "./containers/index_layout";
-import Base_layout from "./containers/base_layout"
+import BaseLayout from "./containers/base_layout"
 import Teacher from "./containers/teacher";
 import SidebarItems from "./componenets/sider-menu";
 
@@ -35,11 +35,11 @@ class App extends React.Component {
                         <RecoverPassword/>
                     </Route>
                     <Route path='/base_layout'>
-                        <Base_layout/>
+                        <BaseLayout/>
                     </Route>
                     <Route path='/teacher' >
-
-                        <SidebarItems/>
+                        <BaseLayout/>
+                        {/*<SidebarItems/>*/}
                     </Route>
                 </Router>
             </div>
