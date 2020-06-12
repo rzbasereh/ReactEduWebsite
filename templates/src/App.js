@@ -13,7 +13,7 @@ import IndexLayout from "./containers/index_layout";
 import Base_layout from "./containers/base_layout"
 import Teacher from "./containers/teacher";
 import SidebarItems from "./componenets/sider-menu";
-
+import BaseLayout from "./containers/base_layout";
 
 class App extends React.Component {
     componentDidMount() {
@@ -35,7 +35,7 @@ class App extends React.Component {
                         <RecoverPassword/>
                     </Route>
                     <Route path='/base_layout'>
-                        <Base_layout/>
+                        <BaseLayout/>
                     </Route>
                     <Route path='/teacher' >
 

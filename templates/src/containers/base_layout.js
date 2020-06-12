@@ -33,7 +33,7 @@ const MassageContent = (
     </div>
 );
 
-class base_layout extends React.Component {
+class BaseLayout extends React.Component {
     state = {
         collapsed: false,
         mode: 'inline',
@@ -94,4 +94,4 @@ class base_layout extends React.Component {
 }
 
 
-export default base_layout;
+export default BaseLayout;

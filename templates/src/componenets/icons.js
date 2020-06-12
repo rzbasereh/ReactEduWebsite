@@ -10,6 +10,7 @@ const DashboardSvg = () => (
 );
 const DashboardIcon = props => <Icon component={DashboardSvg} {...props} />;
 
+
 const ClassSvg = () => (
     <svg className="bi bi-display" width="1em" height="1em" viewBox="0 0 16 16"
          fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -21,6 +22,7 @@ const ClassSvg = () => (
 );
 const ClassIcon = props => <Icon component={ClassSvg} {...props} />;
 
+
 const ReportSvg = () => (
     <svg className="bi bi-calendar" width="1em" height="1em" viewBox="0 0 16 16"
          fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -31,6 +33,7 @@ const ReportSvg = () => (
     </svg>
 );
 const ReportIcon = props => <Icon component={ReportSvg} {...props} />;
+
 
 const ExamSvg = () => (
     <svg className="bi bi-check-square" width="1em"
@@ -45,6 +48,7 @@ const ExamSvg = () => (
 );
 const ExamIcon = props => <Icon component={ExamSvg} {...props} />;
 
+
 const ChatSvg = () => (
     <svg className="bi bi-chat-square" width="1em" height="1em"
          viewBox="0 0 16 16" fill="currentColor"
@@ -55,6 +59,7 @@ const ChatSvg = () => (
 );
 const ChatIcon = props => <Icon component={ChatSvg} {...props} />;
 
+
 const OpenSidebarSvg = () => (
     <svg className="bi bi-filter-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
          xmlns="http://www.w3.org/2000/svg">
@@ -63,6 +68,7 @@ const OpenSidebarSvg = () => (
     </svg>
 );
 const OpenSidebarIcon = props => <Icon component={OpenSidebarSvg} {...props} />;
+
 
 const EnvelopeSvg = () => (
     <svg className="bi bi-envelope" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
@@ -75,6 +81,7 @@ const EnvelopeSvg = () => (
 );
 const EnvelopeIcon = props => <Icon component={EnvelopeSvg} {...props} />;
 
+
 const BellSvg = () => (
     <svg className="bi bi-bell" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
          xmlns="http://www.w3.org/2000/svg">
@@ -85,6 +92,7 @@ const BellSvg = () => (
 );
 const BellIcon = props => <Icon component={BellSvg} {...props} />;
 
+
 const ChevronDownSvg = () => (
     <svg className="bi bi-chevron-down" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
          xmlns="http://www.w3.org/2000/svg">
@@ -93,6 +101,7 @@ const ChevronDownSvg = () => (
     </svg>
 );
 const ChevronDownIcon = props => <Icon component={ChevronDownSvg} {...props} />;
+
 
 export {
     DashboardIcon,
