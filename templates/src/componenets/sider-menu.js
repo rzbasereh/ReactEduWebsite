@@ -1,53 +1,122 @@
 import React from "react";
-import {Menu} from 'antd';
+import {Menu, Button} from 'antd';
 import {
     DashboardIcon,
     ClassIcon,
     ReportIcon,
     ExamIcon,
     ChatIcon,
+    PlusIcon,
+    UserIcon,
+    MenuIcon
 } from "../componenets/icons";
 import SubMenu from "antd/es/menu/SubMenu";
 import {Link} from "react-router-dom";
 
 class SidebarItems extends React.Component {
-    state = {
-        collapsed: false,
-        mode: 'inline',
-        theme: 'light',
-    };
+
+    constructor() {
+        super();
+        this.state = {
+            mode: 'inline',
+            theme: 'light',
+            defaultSelectedKeys: ['1'],
+        };
+        if (window.location.pathname === "/teacher/exam") {
+            this.state = {
+                defaultSelectedKeys: ['4'],
+                mode: 'inline',
+                theme: 'light',
+            }
+        }
+    }
+
+    //  getKey = ({key}) => {
+    //     let itemKey = {key};
+    //             // console.log(itemKey.key === "3");
+    //      let path = window.location.pathname;
+    //     // console.log(path)
+    //      if (window.location.pathname === path) {
+    //          this.setState({
+    //              defaultSelectedKeys: [itemKey.key],
+    //          })
+    //      }
+    // };
 
     render() {
         return (
-            <Menu
+            <Menu onClick={this.getKey}
                 mode={this.state.mode}
                 theme={this.state.theme}
-                defaultSelectedKeys={['1']}>
+                defaultSelectedKeys={this.state.defaultSelectedKeys}
+            >
+
                 <Menu.Item key="1" icon={<DashboardIcon/>}>
-                    <span>داشبورد</span>
+                    <Link to="/teacher/dashboard">
+                        <span>داشبورد</span>
+                    </Link>
                 </Menu.Item>
                 <Menu.Item key="2" icon={<ClassIcon/>}>
-                    <span>کلاس ها</span>
+                    <Link to="/teacher/classes">
+                        <span>کلاس ها</span>
+                    </Link>
                 </Menu.Item>
                 <Menu.Item key="3" icon={<ReportIcon/>}>
-                    <span>گزارش ها</span>
-                </Menu.Item>
-                <SubMenu key="sub1" title="آزمون ها" icon={<ExamIcon/>}>
-                    <Link to="teacher/exams">
-                        <Menu.Item key="4">
-                            <span>کارنامه آزمون</span>
-                        </Menu.Item>
+                    <Link to="/teacher/reports">
+                        <span>گزارش ها</span>
                     </Link>
-                    <Menu.Item key="5">
-                        <span>آزمون آنلاین</span>
-                    </Menu.Item>
-                </SubMenu>
-                <Menu.Item key="6" icon={<ChatIcon/>}>
-                    <span>گفت و گو</span>
+                </Menu.Item>
+                <Menu.Item key="4" icon={<ExamIcon/>}>
+                    <Link to="/teacher/exam">
+                        <span>آزمون ها</span>
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="5" icon={<ChatIcon/>}>
+                    <Link to="/teacher/chats">
+                        <span>گفت و گو</span>
+                    </Link>
                 </Menu.Item>
             </Menu>
         );
     }
 }
 
-export default SidebarItems;
+class AllQuestionPageMenuItems extends React.Component {
+    render() {
+        return (
+            <Menu className="exam-menu"
+                  mode="inline"
+                  theme="light"
+                  defaultSelectedKeys={['1']}>
+                <Menu.Item>
+                    <Link>
+                        <Button type="primary" icon={<PlusIcon/>}>
+                            افزودن سوال
+                        </Button>
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="1" icon={<MenuIcon/>}>
+                    <Link to="/teacher/exam">
+                        <span>همه ی سوالات</span>
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="2" icon={<UserIcon/>}>
+                    <Link>
+                        <span>سوالات شما</span>
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="3">
+                        <span>فیلتر ها</span>
+                </Menu.Item>
+                <Menu.Item key="4">
+                    <Link>
+                        <span>سوالات شما</span>
+                    </Link>
+                </Menu.Item>
+            </Menu>
+        );
+    }
+
+}
+
+export {SidebarItems, AllQuestionPageMenuItems};

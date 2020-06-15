@@ -7,13 +7,13 @@ import {
     OpenSidebarIcon,
     EnvelopeIcon,
     BellIcon,
-    ChevronDownIcon, DashboardIcon, ClassIcon, ReportIcon, ExamIcon, ChatIcon
+    ChevronDownIcon
 } from "../componenets/icons";
-import Icon from "@ant-design/icons";
 import Search from "antd/es/input/Search";
 import Link from "antd/lib/typography/Link";
-import SidebarItems from "../componenets/sider-menu"
-import SubMenu from "antd/es/menu/SubMenu";
+import {SidebarItems, AllQuestionPageMenuItems} from "../componenets/sider-menu";
+import {Route} from "react-router-dom";
+import Exam from "./exam";
 
 const {Header, Sider, Content} = Layout;
 
@@ -34,21 +34,50 @@ const MassageContent = (
 );
 
 class BaseLayout extends React.Component {
-    state = {
-        collapsed: false,
-        mode: 'inline',
-        theme: 'light',
+
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            collapsed: false,
+            mode: 'inline',
+            theme: 'light',
+        };
+        if (window.location.pathname === "/teacher/exam") {
+            this.state = {
+                collapsed: true,
+                mode: 'inline',
+                theme: 'light',
+            }
+        }
+    }
+
+
+    closeSider = () => {
+        if (window.location.pathname === "/teacher/exam") {
+            this.setState({
+                collapsed: true,
+            });
+        } else {
+            this.setState({
+                collapsed: false,
+            })
+        }
     };
+
+
     toggle = () => {
         this.setState({
             collapsed: !this.state.collapsed,
         });
     };
 
+
     render() {
         return (
             <Layout>
-                <Sider trigger={null} collapsible collapsed={this.state.collapsed} theme={"light"}>
+                <Sider trigger={null} collapsible collapsed={this.state.collapsed} theme={"light"}
+                       onClick={this.closeSider}>
                     <SidebarItems/>
                 </Sider>
                 <Layout className="site-layout">
@@ -81,13 +110,30 @@ class BaseLayout extends React.Component {
                             </Col>
                         </Row>
                     </Header>
-                    <Content
-                        className="site-layout-background"
-                        style={{
-                            margin: '24px 16px',
-                            minHeight: 280,
-                        }}>
-                    </Content>
+                    <Route exact path="/teacher/dashboard">
+                        <Content
+                            className="site-layout-background"
+                            style={{
+                                minHeight: 280,
+                            }}>
+                        </Content>
+                    </Route>
+                    <Route path="/teacher/exam">
+                        <Content
+                            className="site-layout-background"
+                            style={{
+                                minHeight: 280,
+                            }}>
+                            <Row className="exam-page-row">
+                                <Col>
+                                    <AllQuestionPageMenuItems/>
+                                </Col>
+                                <Col>
+                                    <Exam/>
+                                </Col>
+                            </Row>
+                        </Content>
+                    </Route>
                 </Layout>
             </Layout>
         );

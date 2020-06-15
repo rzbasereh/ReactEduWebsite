@@ -103,6 +103,88 @@ const ChevronDownSvg = () => (
 const ChevronDownIcon = props => <Icon component={ChevronDownSvg} {...props} />;
 
 
+const PlusSvg = () => (
+    <svg className="bi bi-plus" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+         xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd"
+              d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+        <path fillRule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+    </svg>
+);
+const PlusIcon = props => <Icon component={PlusSvg} {...props}/>;
+
+
+const UserSvg = () => (
+    <svg className="bi bi-person" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+         xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd"
+              d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+    </svg>
+);
+const UserIcon = props => <Icon component={UserSvg} {...props}/>;
+
+
+const MenuSvg = () => (
+    <svg className="bi bi-list-ul" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+         xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd"
+              d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+    </svg>
+);
+const MenuIcon = props => <Icon component={MenuSvg} {...props}/>;
+
+
+const HouseSvg = () => (
+    <svg className="bi bi-house-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+         xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd"
+              d="M8 3.293l6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+        <path fillRule="evenodd"
+              d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+    </svg>
+);
+const HouseIcon = props => <Icon component={HouseSvg} {...props}/>;
+
+
+const ChevronLeftSvg = () => (
+    <svg className="bi bi-chevron-left" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+         xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd"
+              d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+    </svg>
+);
+const ChevronLeftIcon = props => <Icon component={ChevronLeftSvg} {...props} />;
+
+
+const DotSvg = () => (
+    <svg className="bi bi-dot" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+         xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd" d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+    </svg>
+);
+const DotIcon = props => <Icon component={DotSvg} {...props}/>;
+
+
+const ThreeDotsSvg = () => (
+    <svg className="bi bi-three-dots" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+         xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd"
+              d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+    </svg>
+);
+const ThreeDotIcon = props => <Icon component={ThreeDotsSvg} {...props}/>;
+
+
+const ChartSvg = () => (
+    <svg className="bi bi-pie-chart" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+         xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path fillRule="evenodd" d="M7.5 7.793V1h1v6.5H15v1H8.207l-4.853 4.854-.708-.708L7.5 7.793z"/>
+    </svg>
+);
+const ChartIcon = props => <Icon component={ChartSvg} {...props}/>;
+
+
 export {
     DashboardIcon,
     ClassIcon,
@@ -112,5 +194,13 @@ export {
     OpenSidebarIcon,
     EnvelopeIcon,
     BellIcon,
-    ChevronDownIcon
+    ChevronDownIcon,
+    PlusIcon,
+    UserIcon,
+    MenuIcon,
+    HouseIcon,
+    ChevronLeftIcon,
+    DotIcon,
+    ThreeDotIcon,
+    ChartIcon
 };

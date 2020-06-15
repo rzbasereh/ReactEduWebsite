@@ -10,16 +10,14 @@ import Login from "./containers/login";
 import * as actions from './store/actions/auth';
 import RecoverPassword from "./containers/RecoverPassword";
 import IndexLayout from "./containers/index_layout";
-import BaseLayout from "./containers/base_layout"
-import Teacher from "./containers/teacher";
-import SidebarItems from "./componenets/sider-menu";
 import BaseLayout from "./containers/base_layout";
+
+
 
 class App extends React.Component {
     componentDidMount() {
         this.props.onTryAutoSignup();
     }
-
 
     render() {
         return (
@@ -34,13 +32,9 @@ class App extends React.Component {
                     <Route path='/RecoverPassword'>
                         <RecoverPassword/>
                     </Route>
-                    <Route path='/base_layout'>
-                        <BaseLayout/>
+                    <Route path='/teacher' component={BaseLayout}>
                     </Route>
-                    <Route path='/teacher' >
-                        <BaseLayout/>
-                        {/*<SidebarItems/>*/}
-                    </Route>
+
                 </Router>
             </div>
         );
