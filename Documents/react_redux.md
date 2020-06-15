@@ -396,7 +396,7 @@ now create our reducer file as *mobReducer.js* in *src/redux/mob/* path:
     import {BUY_MOB} from './mobTypes';
     
     const initialState = {
-        numOgMobs : 
+        numOfMobs : 100
     }
     
     const mobReducer = (state = initialState, action) => {

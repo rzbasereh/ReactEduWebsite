@@ -7,17 +7,18 @@ import {
 } from "react-router-dom";
 import {connect} from "react-redux";
 import Login from "./containers/login";
-import * as actions from './store/actions/auth';
+import * as actions from './store/actions';
 import RecoverPassword from "./containers/RecoverPassword";
 import IndexLayout from "./containers/index_layout";
-import BaseLayout from "./containers/base_layout";
-
+import BaseLayout from "./containers/base_layout"
 
 
 class App extends React.Component {
     componentDidMount() {
         this.props.onTryAutoSignup();
+        this.props.collectCommonData();
     }
+
 
     render() {
         return (
@@ -35,6 +36,19 @@ class App extends React.Component {
                     <Route path='/teacher' component={BaseLayout}>
                     </Route>
 
+                    <Route path='/base_layout'>
+                        <BaseLayout/>
+                    </Route>
+                    {
+                        this.props.user === "teacher" ?
+                            <Route path='/teacher'>
+                                <BaseLayout/>
+                                {/*<SidebarItems/>*/}
+                            </Route>
+                            :
+                            ""
+                        // TODO: Forbidden Access Page
+                    }
                 </Router>
             </div>
         );
@@ -43,13 +57,15 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.token !== null
+        isAuthenticated: state.auth.token !== null,
+        user: state.auth.user
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onTryAutoSignup: () => dispatch(actions.authCheckState())
+        onTryAutoSignup: () => dispatch(actions.authCheckState()),
+        collectCommonData: () => dispatch(actions.collectCommonData())
     }
 };
 

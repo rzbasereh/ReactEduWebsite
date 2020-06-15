@@ -14,6 +14,8 @@ import Link from "antd/lib/typography/Link";
 import {SidebarItems, AllQuestionPageMenuItems} from "../componenets/sider-menu";
 import {Route} from "react-router-dom";
 import Exam from "./exam";
+import SubMenu from "antd/es/menu/SubMenu";
+import {connect} from "react-redux";
 
 const {Header, Sider, Content} = Layout;
 
@@ -92,18 +94,21 @@ class BaseLayout extends React.Component {
                             </Col>
                             <Col span={12}>
                                 <Popover content={UserContent} trigger="hover" placement="bottomRight">
-                                    <Button>نام کاربر
+                                    <Button>
+                                        {this.props.full_name}
                                         <ChevronDownIcon/>
                                     </Button>
                                 </Popover>
                                 <Avatar icon={<UserOutlined/>}/>
                                 <Popover content={EventContent} title='رویداد ها' trigger="click">
-                                    <Button className='bell'><BellIcon/>
+                                    <Button className='bell'>
+                                        <BellIcon/>
                                         <Badge status="processing"/>
                                     </Button>
                                 </Popover>
                                 <Popover content={MassageContent} title='پیام ها' trigger="click">
-                                    <Button><EnvelopeIcon/>
+                                    <Button>
+                                        <EnvelopeIcon/>
                                         <Badge status="processing"/>
                                     </Button>
                                 </Popover>
@@ -140,5 +145,12 @@ class BaseLayout extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        full_name: state.main.full_name,
+        has_message: state.main.has_message,
+        has_notification: state.main.has_notification,
+    }
+};
 
 export default BaseLayout;

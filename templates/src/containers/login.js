@@ -176,10 +176,10 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        loading: state.loading,
-        error: state.error,
-        isAuthenticated: state.token !== null,
-        user: state.user
+        loading: state.auth.loading,
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null,
+        user: state.auth.user
     };
 };
 

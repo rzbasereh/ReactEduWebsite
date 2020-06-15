@@ -9,6 +9,8 @@ urlpatterns = [
     # path('recover-pass/', views.recoverPassword, name="recoverPassword"),
     path('auth/', views.login, name="auth"),
     path('login/check/', views.check_email, name="check_email"),
+    path('auth_type/', views.auth_type, name="auth_type"),
+    path('common_data/', views.common_data, name="common_data"),
     # path('notFound/', views.notFound, name="notFound"),
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -9,7 +9,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework import status
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from .models import Student, Teacher, Adviser, Manager
+from .models import Student, Teacher, Adviser, Manager, Notification, Message
 from .serializers import StudentSerializer
 # from .forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
@@ -44,6 +44,31 @@ def check_email(request):
         return Response({"exists": True}, status=status.HTTP_200_OK)
     else:
         return Response({"exists": False}, status=status.HTTP_200_OK)
+
+
+@api_view(["GET"])
+def auth_type(request):
+    return Response({"user": userType(request.user)}, status=status.HTTP_200_OK)
+
+
+@api_view(["GET"])
+def common_data(request):
+    full_name = request.user.get_full_name()
+    # avatar = StudentForm.objects.filter(user=request.user.student)[0].avatar.url
+    avatar = "fd"
+    has_message = Message.objects.filter(user=request.user, is_seen=False).exists()
+    # message = Message.objects.filter(user=request.user)
+    has_notification = Notification.objects.filter(user=request.user, is_seen=False).exists()
+    # notification = Notification.objects.filter(user=request.user, is_seen=False)
+    user = {
+        'full_name': full_name,
+        'avatar': avatar,
+        'has_message': has_message,
+        'message': "",
+        'has_notification': has_notification,
+        'notification': "",
+    }
+    return Response(user, status=status.HTTP_200_OK)
 
 
 class Authentication(ObtainAuthToken):
