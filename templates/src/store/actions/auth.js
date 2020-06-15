@@ -67,11 +67,20 @@ export const authCheckState = () => {
             dispatch(logout())
         } else {
             const expirationDate = new Date(localStorage.getItem('expirationDate'));
-            if (expirationDate <= new Date()){
+            if (expirationDate <= new Date()) {
                 dispatch(logout());
-            }else {
-                dispatch(authSuccess(token, ""));
-                dispatch(checkAuthTimeout(( expirationDate.getTime() - new Date().getTime()) / 1000))
+            } else {
+                let user = "";
+                axios.get('http://127.0.0.1:8000/api/auth_type/', {headers: {Authorization: "Token " + token}})
+                    .then(res => {
+                        user = res.data.user;
+                        dispatch(authSuccess(token, user));
+                        dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000))
+                        console.log("type ",user);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
             }
         }
     }
