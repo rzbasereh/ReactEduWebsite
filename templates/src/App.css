@@ -495,7 +495,6 @@ input:-webkit-autofill:active {
     position: absolute;
     bottom: -7px;
     left: -13px;
-    z-index: 1000000;
 }
 
 .ant-layout-header .ant-col:last-child button:first-child {
@@ -1001,4 +1000,10 @@ pre {
     padding: 0 30px;
     position: relative;
     top: -25px;
+}
+.questions .path .ant-col:last-child > span:nth-child(2) button {
+    background-color: white;
+    box-shadow: none;
+    border: none;
+    padding: 0;
 }

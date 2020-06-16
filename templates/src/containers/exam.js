@@ -1,5 +1,5 @@
 import React from "react";
-import {Row, Card, Menu, Dropdown, Collapse} from "antd";
+import {Row, Card, Menu, Dropdown, Collapse, Modal} from "antd";
 import {
     HouseIcon,
     ChevronLeftIcon,
@@ -15,6 +15,8 @@ import KanoonImg from "../img/kanoon.png";
 import Gozine2Img from "../img/Gozine2.png";
 import SanjeshImg from "../img/Sanjesh.png";
 import CaretRightOutlined from "@ant-design/icons/lib/icons/CaretRightOutlined";
+import Pagination from "antd/es/pagination";
+import Button from "antd/es/button";
 
 
 const {Option} = Select;
@@ -47,6 +49,29 @@ class Exam extends React.Component {
     callback = ({key}) => {
         console.log({key});
     };
+
+    state = {visible: false};
+
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    };
+
+    handleOk = e => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    };
+
+    handleCancel = e => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    };
+
 
     render() {
         return (
@@ -87,7 +112,18 @@ class Exam extends React.Component {
                                 </Col>
                                 <Col>
                                     <span className='question-level simple'>ساده</span>
-                                    <span><ChartIcon/></span>
+                                    <span>
+                                        <Button type="primary" onClick={this.showModal}>
+                                            <ChartIcon/>
+                                        </Button>
+                                        <Modal
+                                            visible={this.state.visible}
+                                            onOk={this.handleOk}
+                                            onCancel={this.handleCancel}
+                                        >
+
+                                        </Modal>
+                                    </span>
                                     <span>
                                     <Dropdown overlay={menu}>
                                         <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
@@ -118,6 +154,12 @@ class Exam extends React.Component {
                             </Panel>
                         </Collapse>
                     </Row>
+                    {/*<Pagination*/}
+                    {/*    total={2}*/}
+                    {/*    showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}*/}
+                    {/*    pageSize={1}*/}
+                    {/*    defaultCurrent={1}*/}
+                    {/*/>*/}
                 </Row>
             </>
         );
