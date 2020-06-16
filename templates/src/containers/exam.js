@@ -102,8 +102,8 @@ class Exam extends React.Component {
                                 <pre> طول اضلاع مثلث قایم الزاویه ای x ، 2x+1 و 2x-1 است (x > 1). طول ضلع متوسط آن کدام است ؟</pre>
                                 <Row className="inline-choices">
                                     <span>1)<span className="choice-amount">13</span></span>
-                                    <span className='correct-choice'>2)<span className="choice-amount">15</span></span>
-                                    <span>3)<span className="choice-amount">17</span></span>
+                                    <span>2)<span className="choice-amount">15</span></span>
+                                    <span className='correct-choice'>3)<span className="choice-amount">17</span></span>
                                     <span>4)<span className="choice-amount">19</span></span>
                                 </Row>
                                 <span className="question-img"><img src={KanoonImg} alt="kanoon"/></span>
