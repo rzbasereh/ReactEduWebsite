@@ -103,13 +103,13 @@ class BaseLayout extends React.Component {
                                 <Popover content={EventContent} title='رویداد ها' trigger="click">
                                     <Button className='bell'>
                                         <BellIcon/>
-                                        <Badge status="processing"/>
+                                        <Badge status="processing" className={this.props.has_notification ? '' : 'no-event'}/>
                                     </Button>
                                 </Popover>
                                 <Popover content={MassageContent} title='پیام ها' trigger="click">
                                     <Button>
                                         <EnvelopeIcon/>
-                                        <Badge status="processing"/>
+                                        <Badge status="processing" className={this.props.has_message ? '' : 'no-event'}/>
                                     </Button>
                                 </Popover>
                             </Col>
