@@ -153,4 +153,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default BaseLayout;
+export default connect(mapStateToProps)(BaseLayout);

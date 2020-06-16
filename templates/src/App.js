@@ -33,18 +33,17 @@ class App extends React.Component {
                     <Route path='/RecoverPassword'>
                         <RecoverPassword/>
                     </Route>
-                    <Route path='/teacher' component={BaseLayout}>
-                    </Route>
-
                     <Route path='/base_layout'>
                         <BaseLayout/>
                     </Route>
                     {
                         this.props.user === "teacher" ?
-                            <Route path='/teacher'>
-                                <BaseLayout/>
-                                {/*<SidebarItems/>*/}
+                            <Route path='/teacher' component={BaseLayout}>
                             </Route>
+                            // <Route path='/teacher'>
+                            //     <BaseLayout/>
+                            //     {/*<SidebarItems/>*/}
+                            // </Route>
                             :
                             ""
                         // TODO: Forbidden Access Page
