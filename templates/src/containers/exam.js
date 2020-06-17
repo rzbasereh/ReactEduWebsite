@@ -17,9 +17,9 @@ import SanjeshImg from "../img/Sanjesh.png";
 import CaretRightOutlined from "@ant-design/icons/lib/icons/CaretRightOutlined";
 import Pagination from "antd/es/pagination";
 import Button from "antd/es/button";
-import {getQuestionApi} from "../store/actions/teacher";
+import {getQuestion, getQuestionApi} from "../store/actions/teacher";
 import {connect} from "react-redux";
-
+import axios from "axios";
 
 const {Option} = Select;
 
@@ -88,6 +88,13 @@ class Exam extends React.Component {
                 placement: "bottomLeft"
             });
         }
+        axios.post("http://127.0.0.1:8000/api/teacher/questions/get_page",{ key:2 },{headers: {Authorization: "Token " + this.props.token}})
+        .then(res => {
+                console.log(res.data);
+        }).catch(err => {
+                console.log(err);
+            });
+
     };
 
     // modal
@@ -219,7 +226,8 @@ class Exam extends React.Component {
 const mapStateToProps = state => {
     return {
         count: state.teacher.data.count,
-        questions: state.teacher.data.questions
+        questions: state.teacher.data.questions,
+        token: state.auth.token
     }
 };
 
