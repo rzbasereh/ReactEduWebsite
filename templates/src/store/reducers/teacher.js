@@ -3,7 +3,6 @@ import * as actionType from './../actions/actionTypes';
 const initialTeacherState = {
     loading: false,
     data: [],
-    questions: 0,
     error: "",
     message: []
 };
@@ -14,8 +13,10 @@ const teacherReducer = (state = initialTeacherState, action) => {
         case actionType.GET_QUESTION:
             return {
                 ...state,
-                data: action.data,
-                questions: action.questions
+                data: {
+                    questions: action.data,
+                    count: action.count
+                }
             };
 
         default:

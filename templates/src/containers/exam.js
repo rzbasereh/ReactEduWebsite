@@ -49,7 +49,7 @@ class Exam extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getQuestionApi();
+        this.props.getQuestionApi(this.state.minValue, this.state.maxValue);
     }
 
     handleChange = value => {
@@ -58,11 +58,13 @@ class Exam extends React.Component {
                 minValue: 0,
                 maxValue: 10,
             });
+            this.props.getQuestionApi(this.state.minValue, this.state.maxValue);
         } else {
             this.setState({
                 minValue: (value - 1) * this.state.unit,
                 maxValue: value * this.state.unit
             });
+            this.props.getQuestionApi(this.state.minValue, this.state.maxValue);
         }
     };
 
@@ -99,37 +101,6 @@ class Exam extends React.Component {
     };
 
     render() {
-        let data = [
-            {
-                grade: "پایه ی دهم", lesson: 'ریاضیات', topic: 'مثلتات', level: 'ساده',
-                questionContent: 'طول اضلاع مثلث قایم الزاویه ای x ، 2x+1 و 2x-1 است (x > 1). طول ضلع متوسط آن کدام است ؟1',
-                firstChoice: '13', secondChoice: '15', thirdChoice: '17', fourthChoice: '19',
-                verboseAns: text, questionImg: KanoonImg,
-            },
-            {
-                grade: "پایه ی دهم", lesson: 'ریاضیات', topic: 'مثلتات', level: 'ساده',
-                questionContent: 'طول اضلاع مثلث قایم الزاویه ای x ، 2x+1 و 2x-1 است (x > 1). طول ضلع متوسط آن کدام است ؟2',
-                firstChoice: '13', secondChoice: '15', thirdChoice: '17', fourthChoice: '19',
-                verboseAns: text, questionImg: KanoonImg,
-            }, {
-                grade: "پایه ی دهم", lesson: 'ریاضیات', topic: 'مثلتات', level: 'ساده',
-                questionContent: 'طول اضلاع مثلث قایم الزاویه ای x ، 2x+1 و 2x-1 است (x > 1). طول ضلع متوسط آن کدام است ؟3',
-                firstChoice: '13', secondChoice: '15', thirdChoice: '17', fourthChoice: '19',
-                verboseAns: text, questionImg: KanoonImg,
-            },
-            {
-                grade: "پایه ی دهم", lesson: 'ریاضیات', topic: 'مثلتات', level: 'ساده',
-                questionContent: 'طول اضلاع مثلث قایم الزاویه ای x ، 2x+1 و 2x-1 است (x > 1). طول ضلع متوسط آن کدام است ؟4',
-                firstChoice: '13', secondChoice: '15', thirdChoice: '17', fourthChoice: '19',
-                verboseAns: text, questionImg: KanoonImg,
-            },
-            {
-                grade: "پایه ی دهم", lesson: 'ریاضیات', topic: 'مثلتات', level: 'ساده',
-                questionContent: 'طول اضلاع مثلث قایم الزاویه ای x ، 2x+1 و 2x-1 است (x > 1). طول ضلع متوسط آن کدام است ؟5',
-                firstChoice: '13', secondChoice: '15', thirdChoice: '17', fourthChoice: '19',
-                verboseAns: text, questionImg: KanoonImg,
-            }
-        ];
         return (
             <>
                 <Row>
@@ -159,7 +130,7 @@ class Exam extends React.Component {
                     {
                         this.props.questions &&
                         this.props.questions.length > 0 &&
-                        this.props.questions.slice(this.state.minValue, this.state.maxValue).map(val => (
+                        this.props.questions.map(val => (
                             <Row className="question-card-row">
                                 <Card>
                                     <Row className="path">
@@ -234,14 +205,14 @@ class Exam extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        count: state.teacher.questions,
-        questions: state.teacher.data
+        count: state.teacher.data.count,
+        questions: state.teacher.data.questions
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getQuestionApi: () => dispatch(getQuestionApi())
+        getQuestionApi: (minValue, maxValue) => dispatch(getQuestionApi(minValue, maxValue))
     }
 };
 
