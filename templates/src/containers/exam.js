@@ -1,5 +1,5 @@
 import React from "react";
-import {Row, Card, Menu, Dropdown, Collapse, Modal, notification} from "antd";
+import {Row, Card, Menu, Dropdown, Collapse, Modal} from "antd";
 import {
     HouseIcon,
     ChevronLeftIcon,
@@ -38,12 +38,17 @@ const text = `
 
 
 class Exam extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             minValue: 0,
-            maxValue: 9
+            maxValue: 10,
+            unit: 10
         };
+    }
+
+    componentDidMount() {
+        this.props.getQuestionApi();
     }
 
     // pagination
@@ -51,12 +56,12 @@ class Exam extends React.Component {
         if (value <= 1) {
             this.setState({
                 minValue: 0,
-                maxValue: 9
+                maxValue: 10,
             });
         } else {
             this.setState({
-                minValue: this.state.maxValue,
-                maxValue: value * 9
+                minValue: (value - 1) * this.state.unit,
+                maxValue: value * this.state.unit
             });
         }
     };
@@ -105,12 +110,34 @@ class Exam extends React.Component {
         });
     };
 
-
     render() {
         let data = [
             {
                 grade: "پایه ی دهم", lesson: 'ریاضیات', topic: 'مثلتات', level: 'ساده',
-                questionContent: 'طول اضلاع مثلث قایم الزاویه ای x ، 2x+1 و 2x-1 است (x > 1). طول ضلع متوسط آن کدام است ؟',
+                questionContent: 'طول اضلاع مثلث قایم الزاویه ای x ، 2x+1 و 2x-1 است (x > 1). طول ضلع متوسط آن کدام است ؟1',
+                firstChoice: '13', secondChoice: '15', thirdChoice: '17', fourthChoice: '19',
+                verboseAns: text, questionImg: KanoonImg,
+            },
+            {
+                grade: "پایه ی دهم", lesson: 'ریاضیات', topic: 'مثلتات', level: 'ساده',
+                questionContent: 'طول اضلاع مثلث قایم الزاویه ای x ، 2x+1 و 2x-1 است (x > 1). طول ضلع متوسط آن کدام است ؟2',
+                firstChoice: '13', secondChoice: '15', thirdChoice: '17', fourthChoice: '19',
+                verboseAns: text, questionImg: KanoonImg,
+            }, {
+                grade: "پایه ی دهم", lesson: 'ریاضیات', topic: 'مثلتات', level: 'ساده',
+                questionContent: 'طول اضلاع مثلث قایم الزاویه ای x ، 2x+1 و 2x-1 است (x > 1). طول ضلع متوسط آن کدام است ؟3',
+                firstChoice: '13', secondChoice: '15', thirdChoice: '17', fourthChoice: '19',
+                verboseAns: text, questionImg: KanoonImg,
+            },
+            {
+                grade: "پایه ی دهم", lesson: 'ریاضیات', topic: 'مثلتات', level: 'ساده',
+                questionContent: 'طول اضلاع مثلث قایم الزاویه ای x ، 2x+1 و 2x-1 است (x > 1). طول ضلع متوسط آن کدام است ؟4',
+                firstChoice: '13', secondChoice: '15', thirdChoice: '17', fourthChoice: '19',
+                verboseAns: text, questionImg: KanoonImg,
+            },
+            {
+                grade: "پایه ی دهم", lesson: 'ریاضیات', topic: 'مثلتات', level: 'ساده',
+                questionContent: 'طول اضلاع مثلث قایم الزاویه ای x ، 2x+1 و 2x-1 است (x > 1). طول ضلع متوسط آن کدام است ؟5',
                 firstChoice: '13', secondChoice: '15', thirdChoice: '17', fourthChoice: '19',
                 verboseAns: text, questionImg: KanoonImg,
             }
@@ -141,22 +168,23 @@ class Exam extends React.Component {
                     </Row>
                 </Row>
                 <Row className="questions">
-                    {data &&
-                    data.length > 0 &&
-                    data.slice(this.state.minValue, this.state.maxValue).map(val => (
-                        <Row className="question-card-row">
-                            <Card>
-                                <Row className="path">
-                                    <Col>
-                                        <span>{val.grade}</span>
-                                        <ChevronLeftIcon/>
-                                        <span> {val.lesson}</span>
-                                        <ChevronLeftIcon/>
-                                        <span>{val.topic}</span>
-                                    </Col>
-                                    <Col>
-                                        <span className='question-level simple'>{val.level}</span>
-                                        <span>
+                    {
+                        this.props.questions &&
+                        this.props.questions.length > 0 &&
+                        this.props.questions.slice(this.state.minValue, this.state.maxValue).map(val => (
+                            <Row className="question-card-row">
+                                <Card>
+                                    <Row className="path">
+                                        <Col>
+                                            <span>{val.grade}</span>
+                                            <ChevronLeftIcon/>
+                                            <span> {val.lesson}</span>
+                                            <ChevronLeftIcon/>
+                                            <span>{val.topic}</span>
+                                        </Col>
+                                        <Col>
+                                            <span className='question-level simple'>{val.level}</span>
+                                            <span>
                                         <Button type="primary" onClick={this.showModal}>
                                             <ChartIcon/>
                                         </Button>
@@ -168,7 +196,7 @@ class Exam extends React.Component {
                                         >
                                         </Modal>
                                     </span>
-                                        <span>
+                                            <span>
                                     <Dropdown overlay={menu}>
                                         <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                                             <ThreeDotIcon/>
@@ -204,9 +232,9 @@ class Exam extends React.Component {
                         </Row>
                     ))}
                     <Pagination
-                        total={10}
+                        total={this.props.count}
                         showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
-                        pageSize={1}
+                        pageSize={this.state.unit}
                         defaultCurrent={1}
                         defaultPageSize={9}
                         onChange={this.handleChange}
@@ -218,4 +246,17 @@ class Exam extends React.Component {
     }
 }
 
-export default Exam;
+const mapStateToProps = state => {
+    return {
+        count: state.teacher.questions,
+        questions: state.teacher.data
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getQuestionApi: () => dispatch(getQuestionApi())
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Exam);
