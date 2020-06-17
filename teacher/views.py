@@ -176,11 +176,11 @@ def selectedQuestion(request):
 @api_view(["POST"])
 def filter_page(request):
     if request.data.get("requestType") == "pagination":
-        # start = int(request.data.get('start'))
-        # stop = int(request.data.get('stop'))
+        start = int(request.data.get('start'))
+        stop = int(request.data.get('stop'))
         count = Question.objects.filter(
             Q(author=request.user.teacher) | Q(is_publish=True)).order_by('-pk').count()
-        select_questions = Question.objects.filter(Q(author=request.user.teacher) | Q(is_publish=True)).order_by('-pk')
+        select_questions = Question.objects.filter(Q(author=request.user.teacher) | Q(is_publish=True)).order_by('-pk')[start:stop]
         new_questions = []
         for question in select_questions:
             print(question.id)

@@ -50,7 +50,7 @@ class Exam extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getQuestionApi();
+        this.props.getQuestionApi(this.state.minValue, this.state.maxValue);
     }
 
     // pagination
@@ -60,11 +60,13 @@ class Exam extends React.Component {
                 minValue: 0,
                 maxValue: 10,
             });
+            this.props.getQuestionApi(this.state.minValue, this.state.maxValue);
         } else {
             this.setState({
                 minValue: (value - 1) * this.state.unit,
                 maxValue: value * this.state.unit
             });
+            this.props.getQuestionApi(this.state.minValue, this.state.maxValue);
         }
     };
 
@@ -141,7 +143,7 @@ class Exam extends React.Component {
                     {
                         this.props.questions &&
                         this.props.questions.length > 0 &&
-                        this.props.questions.slice(this.state.minValue, this.state.maxValue).map(val => (
+                        this.props.questions.map(val => (
                             <Row className="question-card-row">
                                 <Card>
                                     <Row className="path">
@@ -216,14 +218,14 @@ class Exam extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        count: state.teacher.questions,
-        questions: state.teacher.data
+        count: state.teacher.data.count,
+        questions: state.teacher.data.questions
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getQuestionApi: () => dispatch(getQuestionApi())
+        getQuestionApi: (minValue, maxValue) => dispatch(getQuestionApi(minValue, maxValue))
     }
 };
 
