@@ -18,7 +18,14 @@ const teacherReducer = (state = initialTeacherState, action) => {
                     count: action.count
                 }
             };
-
+        case actionType.UPDATE_PACK:
+            return {
+                ...state,
+                data: {
+                   ...state.data,
+                    selectedQuestion: action.count
+                }
+            };
         default:
             return state;
     }

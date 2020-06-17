@@ -20,6 +20,7 @@ import Button from "antd/es/button";
 import {getQuestion, getQuestionApi} from "../store/actions/teacher";
 import {connect} from "react-redux";
 import axios from "axios";
+import {updatePackApi} from "../store/actions";
 
 const {Option} = Select;
 
@@ -73,28 +74,24 @@ class Exam extends React.Component {
     // checkbox and toast
     handleCheckbox = e => {
         console.log(e.target.checked);
+        console.log(e.target.id);
         if ( e.target.checked === true) {
+            this.props.updatePackApi(e.target.id , 'add');
             notification.success({
                 description:
                     'سوال با موفقیت اضافه شد .',
-                duration: 0,
+                // duration: 0,
                 placement: "bottomLeft"
             });
         } else {
+            this.props.updatePackApi(e.target.id , 'remove');
             notification.success({
                 description:
                     'سوال با موفقیت حذف شد .',
-                duration: 0,
+                // duration: 0,
                 placement: "bottomLeft"
             });
         }
-        axios.post("http://127.0.0.1:8000/api/teacher/questions/get_page",{ key:2 },{headers: {Authorization: "Token " + this.props.token}})
-        .then(res => {
-                console.log(res.data);
-        }).catch(err => {
-                console.log(err);
-            });
-
     };
 
     // modal
@@ -185,7 +182,7 @@ class Exam extends React.Component {
                                     </Col>
                                 </Row>
                                 <Row className="question-content">
-                                    <Checkbox onChange={this.handleCheckbox}>
+                                    <Checkbox onChange={this.handleCheckbox} id={val.id}>
                                     </Checkbox>
                                     <pre> {val.questionContent}</pre>
                                     <Row className="inline-choices">
@@ -233,7 +230,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getQuestionApi: (minValue, maxValue) => dispatch(getQuestionApi(minValue, maxValue))
+        getQuestionApi: (minValue, maxValue) => dispatch(getQuestionApi(minValue, maxValue)),
+        updatePackApi: (pk, state) => dispatch(updatePackApi(pk, state))
     }
 };
 
