@@ -1,5 +1,5 @@
 import React from "react";
-import {Row, Card, Menu, Dropdown, Collapse, Modal} from "antd";
+import {Row, Card, Menu, Dropdown, Collapse, Modal, notification} from "antd";
 import {
     HouseIcon,
     ChevronLeftIcon,
@@ -36,6 +36,7 @@ const text = `
   لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
 `;
 
+
 class Exam extends React.Component {
     constructor() {
         super();
@@ -45,6 +46,7 @@ class Exam extends React.Component {
         };
     }
 
+    // pagination
     handleChange = value => {
         if (value <= 1) {
             this.setState({
@@ -59,16 +61,28 @@ class Exam extends React.Component {
         }
     };
 
-
-    handleCheckbox = (e) => {
-        console.log(e.target.checked)
+    // checkbox and toast
+    handleCheckbox = e => {
+        console.log(e.target.checked);
+        if ( e.target.checked === true) {
+            notification.success({
+                description:
+                    'سوال با موفقیت اضافه شد .',
+                duration: 0,
+                placement: "bottomLeft"
+            });
+        } else {
+            notification.success({
+                description:
+                    'سوال با موفقیت حذف شد .',
+                duration: 0,
+                placement: "bottomLeft"
+            });
+        }
     };
 
 
-    callback = ({key}) => {
-        console.log({key});
-    };
-
+    // modal
     state = {visible: false};
 
     showModal = () => {
@@ -94,10 +108,11 @@ class Exam extends React.Component {
 
     render() {
         let data = [
-            {grade : "پایه ی دهم" , lesson : 'ریاضیات' , topic: 'مثلتات' , level: 'ساده' ,
-            questionContent : 'طول اضلاع مثلث قایم الزاویه ای x ، 2x+1 و 2x-1 است (x > 1). طول ضلع متوسط آن کدام است ؟',
-            firstChoice:'13', secondChoice: '15', thirdChoice: '17', fourthChoice: '19',
-                verboseAns: text, questionImg:KanoonImg,
+            {
+                grade: "پایه ی دهم", lesson: 'ریاضیات', topic: 'مثلتات', level: 'ساده',
+                questionContent: 'طول اضلاع مثلث قایم الزاویه ای x ، 2x+1 و 2x-1 است (x > 1). طول ضلع متوسط آن کدام است ؟',
+                firstChoice: '13', secondChoice: '15', thirdChoice: '17', fourthChoice: '19',
+                verboseAns: text, questionImg: KanoonImg,
             }
         ];
         return (
@@ -126,9 +141,9 @@ class Exam extends React.Component {
                     </Row>
                 </Row>
                 <Row className="questions">
-                    { data &&
-                        data.length > 0 &&
-                        data.slice(this.state.minValue, this.state.maxValue).map(val => (
+                    {data &&
+                    data.length > 0 &&
+                    data.slice(this.state.minValue, this.state.maxValue).map(val => (
                         <Row className="question-card-row">
                             <Card>
                                 <Row className="path">
@@ -163,7 +178,10 @@ class Exam extends React.Component {
                                     </Col>
                                 </Row>
                                 <Row className="question-content">
-                                    <Checkbox onChange={this.handleCheckbox}></Checkbox>
+                                    <Checkbox onChange={this.handleCheckbox}
+                                              >
+
+                                    </Checkbox>
                                     <pre> {val.questionContent}</pre>
                                     <Row className="inline-choices">
                                         <span>1)<span className="choice-amount">{val.firstChoice}</span></span>
@@ -184,7 +202,7 @@ class Exam extends React.Component {
                                 </Panel>
                             </Collapse>
                         </Row>
-                        ))}
+                    ))}
                     <Pagination
                         total={10}
                         showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
