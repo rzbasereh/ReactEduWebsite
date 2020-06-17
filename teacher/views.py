@@ -135,34 +135,36 @@ def cancelAddQuestion(request, pk):
     return HttpResponseRedirect(reverse('teacher:questions'))
 
 
+@api_view(["POST"])
 def selectedQuestion(request):
-    if request.method == "POST":
-        pk = request.POST.get('pk')
-        state = request.POST.get('state')
-        teacher = request.user.teacher
-        if state == "add":
-            if QuestionPack.objects.filter(teacher=request.user.teacher).count() == 0 or QuestionPack.objects.filter(
-                    teacher=request.user.teacher).last().submit:
-                question_pack = QuestionPack(teacher=teacher)
-                question_pack.save()
-                question_pack.questions.add(Question.objects.get(id=pk))
-                pack_pk = question_pack.id
-                count = question_pack.questions.count()
-                return JsonResponse({"value": "success", "type": "add", "pack_pk": pack_pk, "count": count})
-            else:
-                question_pack = QuestionPack.objects.get(teacher=request.user.teacher, submit=False)
-                question_pack.questions.add(Question.objects.get(id=pk))
-                pack_pk = question_pack.id
-                count = question_pack.questions.count()
-                return JsonResponse({"value": "success", "type": "add", "pack_pk": pack_pk, "count": count})
-        elif state == "remove":
-            if QuestionPack.objects.filter(teacher=request.user.teacher, submit=False).exists():
-                question_pack = QuestionPack.objects.get(teacher=request.user.teacher, submit=False)
-                question_pack.questions.remove(Question.objects.get(id=pk))
-                pack_pk = question_pack.id
-                count = question_pack.questions.count()
-                return JsonResponse({"value": "success", "type": "remove", "pack_pk": pack_pk, "count": count})
-        return JsonResponse({"value": "error"})
+    return Response({"sratus": "ok"})
+    # if request.method == "POST":
+    #     pk = request.POST.get('pk')
+    #     state = request.POST.get('state')
+    #     teacher = request.user.teacher
+    #     if state == "add":
+    #         if QuestionPack.objects.filter(teacher=request.user.teacher).count() == 0 or QuestionPack.objects.filter(
+    #                 teacher=request.user.teacher).last().submit:
+    #             question_pack = QuestionPack(teacher=teacher)
+    #             question_pack.save()
+    #             question_pack.questions.add(Question.objects.get(id=pk))
+    #             pack_pk = question_pack.id
+    #             count = question_pack.questions.count()
+    #             return JsonResponse({"value": "success", "type": "add", "pack_pk": pack_pk, "count": count})
+    #         else:
+    #             question_pack = QuestionPack.objects.get(teacher=request.user.teacher, submit=False)
+    #             question_pack.questions.add(Question.objects.get(id=pk))
+    #             pack_pk = question_pack.id
+    #             count = question_pack.questions.count()
+    #             return JsonResponse({"value": "success", "type": "add", "pack_pk": pack_pk, "count": count})
+    #     elif state == "remove":
+    #         if QuestionPack.objects.filter(teacher=request.user.teacher, submit=False).exists():
+    #             question_pack = QuestionPack.objects.get(teacher=request.user.teacher, submit=False)
+    #             question_pack.questions.remove(Question.objects.get(id=pk))
+    #             pack_pk = question_pack.id
+    #             count = question_pack.questions.count()
+    #             return JsonResponse({"value": "success", "type": "remove", "pack_pk": pack_pk, "count": count})
+    #     return JsonResponse({"value": "error"})
     # elif request.method == "GET":
     #     pack_pk = request.GET.get('pack_pk')
     #     if QuestionPack.objects.filter(id=pack_pk).exists():
@@ -180,7 +182,8 @@ def filter_page(request):
         stop = int(request.data.get('stop'))
         count = Question.objects.filter(
             Q(author=request.user.teacher) | Q(is_publish=True)).order_by('-pk').count()
-        select_questions = Question.objects.filter(Q(author=request.user.teacher) | Q(is_publish=True)).order_by('-pk')[start:stop]
+        select_questions = Question.objects.filter(Q(author=request.user.teacher) | Q(is_publish=True)).order_by('-pk')[
+                           start:stop]
         new_questions = []
         for question in select_questions:
             print(question.id)
