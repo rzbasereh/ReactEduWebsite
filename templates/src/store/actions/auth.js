@@ -76,7 +76,6 @@ export const authCheckState = () => {
                         user = res.data.user;
                         dispatch(authSuccess(token, user));
                         dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000))
-                        console.log("type ",user);
                     })
                     .catch(err => {
                         console.log(err);
