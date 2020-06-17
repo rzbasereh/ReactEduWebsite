@@ -1,3 +1,5 @@
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
@@ -171,29 +173,59 @@ def selectedQuestion(request):
     #         return JsonResponse({"value": "forbidden access"})
 
 
+@api_view(["POST"])
 def filter_page(request):
-    if request.method == "POST":
-        if request.POST.get("requestType") == "pagination":
-            unit = int(request.POST.get('unit'))
-            page = int(request.POST.get('page'))
-            start = (page - 1) * unit
-            end = unit * page
-            new_questions = serializers.serialize("json", Question.objects.filter(
-                Q(author=request.user.teacher) | Q(is_publish=True)).order_by('-pk')[start:end])
-            # checked = list(QuestionPack.objects.get(submit=False).questions.all().values_list("id", flat=True))
-            return JsonResponse({"value": "success", "questions": new_questions})
-        elif request.POST.get("requestType") == "my_questions":
-            unit = int(request.POST.get('unit'))
-            page = 1
-            start = (page - 1) * unit
-            end = unit * page
-            new_questions = serializers.serialize("json",
-                                                  Question.objects.filter(author=request.user.teacher)
-                                                  .order_by('-pk')[start:end])
-            checked = 1
-            return JsonResponse({"value": "success", "questions": new_questions, "checked": checked})
-    else:
-        return JsonResponse({"value": "forbidden access"})
+    if request.data.get("requestType") == "pagination":
+        # start = int(request.data.get('start'))
+        # stop = int(request.data.get('stop'))
+        count = Question.objects.filter(
+            Q(author=request.user.teacher) | Q(is_publish=True)).order_by('-pk').count()
+        select_questions = Question.objects.filter(Q(author=request.user.teacher) | Q(is_publish=True)).order_by('-pk')
+        new_questions = []
+        for question in select_questions:
+            print(question.id)
+            data = dict()
+            data["id"] = question.id
+            data["grade"] = "پایه ی دهم"
+            data["lesson"] = "ریاضیات"
+            data["topic"] = "مثلتات"
+            data["level"] = question.level
+            data["questionContent"] = question.body
+            data["firstChoice"] = question.choice_1
+            data["secondChoice"] = question.choice_2
+            data["thirdChoice"] = question.choice_3
+            data["fourthChoice"] = question.choice_4
+            data["verboseAns"] = question.verbose_ans
+            data["questionImg"] = "پایه ی دهم"
+            new_questions.append(data)
+        # checked = list(QuestionPack.objects.get(submit=False).questions.all().values_list("id", flat=True))
+        return Response({"value": "success", "questions": new_questions, "count": count})
+
+    return Response({"get": request.data})
+
+
+# if request.method == "POST":
+#     if request.POST.get("requestType") == "pagination":
+#         unit = int(request.POST.get('unit'))
+#         page = int(request.POST.get('page'))
+#         start = (page - 1) * unit
+#         end = unit * page
+#         new_questions = serializers.serialize("json", Question.objects.filter(
+#             Q(author=request.user.teacher) | Q(is_publish=True)).order_by('-pk')[start:end])
+#         # checked = list(QuestionPack.objects.get(submit=False).questions.all().values_list("id", flat=True))
+#         return JsonResponse({"value": "success", "questions": new_questions})
+#     elif request.POST.get("requestType") == "my_questions":
+#         unit = int(request.POST.get('unit'))
+#         page = 1
+#         start = (page - 1) * unit
+#         end = unit * page
+#         new_questions = serializers.serialize("json",
+#                                               Question.objects.filter(author=request.user.teacher)
+#                                               .order_by('-pk')[start:end])
+#         checked = 1
+#         return JsonResponse({"value": "success", "questions": new_questions, "checked": checked})
+# else:
+#     return JsonResponse({"value": "forbidden access"})
 
 
 def edit_question(request):
