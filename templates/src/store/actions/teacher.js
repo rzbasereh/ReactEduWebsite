@@ -8,10 +8,11 @@ export const getQuestion = (data, count) => {
         count: count
     };
 };
-export const updatePack = (count) => {
+export const updatePack = (count , pack_pk) => {
     return {
         type: actionType.UPDATE_PACK,
-        count: count
+        count: count,
+        pack_pk: pack_pk
     };
 };
 
@@ -44,6 +45,7 @@ export const updatePackApi = (id , state) => {
         axios.post("http://127.0.0.1:8000/api/teacher/questions/selected", post_data, {headers: {Authorization: "Token " + token}})
             .then(res => {
                 console.log(res.data);
+                dispatch(updatePack(res.data.count , res.data.pack_pk));
             })
             .catch(err => {
                 console.log(err);

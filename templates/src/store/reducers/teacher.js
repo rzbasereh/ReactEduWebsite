@@ -23,7 +23,8 @@ const teacherReducer = (state = initialTeacherState, action) => {
                 ...state,
                 data: {
                    ...state.data,
-                    selectedQuestion: action.count
+                    selectedQuestion: action.count,
+                    pack_pk: action.pack_pk,
                 }
             };
         default:

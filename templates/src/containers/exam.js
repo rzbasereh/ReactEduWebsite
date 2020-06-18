@@ -4,7 +4,9 @@ import {
     HouseIcon,
     ChevronLeftIcon,
     ThreeDotIcon,
-    ChartIcon
+    ChartIcon,
+    XIcon,
+    CheckIcon
 } from "../componenets/icons";
 import {Link} from "react-router-dom";
 import Select from "antd/es/select";
@@ -80,16 +82,22 @@ class Exam extends React.Component {
             notification.success({
                 description:
                     'سوال با موفقیت اضافه شد .',
-                // duration: 0,
-                placement: "bottomLeft"
+                duration: 3,
+                placement: "bottomLeft",
+                icon: CheckIcon(),
+                closeIcon: XIcon(),
+                className: 'success',
             });
         } else {
             this.props.updatePackApi(e.target.id , 'remove');
             notification.success({
                 description:
                     'سوال با موفقیت حذف شد .',
-                // duration: 0,
-                placement: "bottomLeft"
+                duration: 3,
+                placement: "bottomLeft",
+                icon: CheckIcon(),
+                closeIcon: XIcon(),
+                className: 'success',
             });
         }
     };
@@ -224,7 +232,6 @@ const mapStateToProps = state => {
     return {
         count: state.teacher.data.count,
         questions: state.teacher.data.questions,
-        token: state.auth.token
     }
 };
 

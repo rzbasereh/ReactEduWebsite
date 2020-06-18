@@ -11,7 +11,8 @@ import {
 } from "../componenets/icons";
 import Search from "antd/es/input/Search";
 import Link from "antd/lib/typography/Link";
-import {SidebarItems, AllQuestionPageMenuItems} from "../componenets/sider-menu";
+import SidebarItems from "../componenets/sider-menu";
+import AllQuestionPageMenuItems from "./exam-menu";
 import {Route} from "react-router-dom";
 import Exam from "./exam";
 import SubMenu from "antd/es/menu/SubMenu";

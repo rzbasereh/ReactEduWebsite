@@ -202,9 +202,9 @@ def filter_page(request):
             data["questionImg"] = "پایه ی دهم"
             new_questions.append(data)
         # for i in range(100):
-        #     a = Question(author=request.user.teacher, body="wefewss + {i}" )
+        #     a = Question(author=request.user.teacher, body="wefewss")
         #     a.save()
-        # checked = list(QuestionPack.objects.get(submit=False).questions.all().values_list("id", flat=True))
+        checked = list(QuestionPack.objects.get(submit=False).questions.all().values_list("id", flat=True))
         return Response({"value": "success", "questions": new_questions, "count": count})
 
     return Response({"get": request.data})

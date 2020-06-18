@@ -12,6 +12,7 @@ import {
 } from "../componenets/icons";
 import SubMenu from "antd/es/menu/SubMenu";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux"
 
 class SidebarItems extends React.Component {
 
@@ -81,42 +82,4 @@ class SidebarItems extends React.Component {
     }
 }
 
-class AllQuestionPageMenuItems extends React.Component {
-    render() {
-        return (
-            <Menu className="exam-menu"
-                  mode="inline"
-                  theme="light"
-                  defaultSelectedKeys={['1']}>
-                <Menu.Item>
-                    <Link>
-                        <Button type="primary" icon={<PlusIcon/>}>
-                            افزودن سوال
-                        </Button>
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key="1" icon={<MenuIcon/>}>
-                    <Link to="/teacher/exam">
-                        <span>همه ی سوالات</span>
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key="2" icon={<UserIcon/>}>
-                    <Link>
-                        <span>سوالات شما</span>
-                    </Link>
-                </Menu.Item>
-                <Menu.Item key="3">
-                        <span>فیلتر ها</span>
-                </Menu.Item>
-                <Menu.Item key="4">
-                    <Link>
-                        <span>سوالات شما</span>
-                    </Link>
-                </Menu.Item>
-            </Menu>
-        );
-    }
-
-}
-
-export {SidebarItems, AllQuestionPageMenuItems};
+export default SidebarItems;
