@@ -19,60 +19,32 @@ import Select from "antd/es/select";
 
 
 const {Column, ColumnGroup} = Table;
-// const data = [
-//     {
-//         key: '0',
-//         'examSubject': 'جامع دهم',
-//         'examTime': '2 : 30 : 30',
-//         'questionNumber': '20',
-//         'examInfo': 'برگزار شده'
-//     },
-//     {
-//         key: '1',
-//         'examSubject': 'جامع دهم',
-//         'examTime': '2 : 30 : 30',
-//         'questionNumber': '20',
-//         'examInfo': 'برگزار شده'
-//     },
-//     {
-//         key: '2',
-//         'examSubject': 'جامع دهم',
-//         'examTime': '2 : 30 : 30',
-//         'questionNumber': '20',
-//         'examInfo': 'برگزار شده'
-//     }
-// ];
+const data = [
+    {
+        key: '0',
+        'examSubject': 'جامع دهم',
+        'examTime': '2 : 30 : 30',
+        'questionNumber': '20',
+        'examInfo': 'برگزار شده'
+    },
+    {
+        key: '1',
+        'examSubject': 'جامع دهم',
+        'examTime': '2 : 30 : 30',
+        'questionNumber': '20',
+        'examInfo': 'برگزار شده'
+    },
+    {
+        key: '2',
+        'examSubject': 'جامع دهم',
+        'examTime': '2 : 30 : 30',
+        'questionNumber': '20',
+        'examInfo': 'برگزار شده'
+    }
+];
 
 class ManageExam extends React.Component {
 
-    constructor() {
-        super();
-        this.state = {
-            data: [
-                {
-                    key: '0',
-                    'examSubject': 'جامع دهم',
-                    'examTime': '2 : 30 : 30',
-                    'questionNumber': '20',
-                    'examInfo': 'برگزار شده'
-                },
-                {
-                    key: '1',
-                    'examSubject': 'جامع دهم',
-                    'examTime': '2 : 30 : 30',
-                    'questionNumber': '20',
-                    'examInfo': 'برگزار شده'
-                },
-                {
-                    key: '2',
-                    'examSubject': 'جامع دهم',
-                    'examTime': '2 : 30 : 30',
-                    'questionNumber': '20',
-                    'examInfo': 'برگزار شده'
-                }
-            ]
-        }
-    }
 
 
     render() {
