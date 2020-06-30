@@ -6,9 +6,7 @@ import {
     ReportIcon,
     ExamIcon,
     ChatIcon,
-    PlusIcon,
-    UserIcon,
-    MenuIcon
+    ManageIcon
 } from "../componenets/icons";
 import SubMenu from "antd/es/menu/SubMenu";
 import {Link} from "react-router-dom";
@@ -23,9 +21,16 @@ class SidebarItems extends React.Component {
             theme: 'light',
             defaultSelectedKeys: ['1'],
         };
-        if (window.location.pathname === "/teacher/exam") {
+        if (window.location.pathname === "/teacher/exam" || window.location.pathname === "/teacher/exam/edit_exam") {
             this.state = {
                 defaultSelectedKeys: ['4'],
+                mode: 'inline',
+                theme: 'light',
+            }
+        }
+        if (window.location.pathname === "/teacher/manage_exam") {
+            this.state = {
+                defaultSelectedKeys: ['5'],
                 mode: 'inline',
                 theme: 'light',
             }
@@ -72,7 +77,12 @@ class SidebarItems extends React.Component {
                         <span>آزمون ها</span>
                     </Link>
                 </Menu.Item>
-                <Menu.Item key="5" icon={<ChatIcon/>}>
+                <Menu.Item key="5" icon={<ManageIcon/>}>
+                    <Link to="/teacher/manage_exam">
+                        <span>مدیریت آزمون</span>
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="6" icon={<ChatIcon/>}>
                     <Link to="/teacher/chats">
                         <span>گفت و گو</span>
                     </Link>

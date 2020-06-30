@@ -157,6 +157,7 @@ input:-webkit-autofill:active {
     color: #FFFFFF;
     background-color: #007BFF;
     box-shadow: 0 5px 10px #007BFF16, 0 15px 40px #007BFF16;
+    border: none;
 }
 
 .ant-input-prefix {
@@ -481,7 +482,8 @@ input:-webkit-autofill:active {
 
 .ant-layout-header .ant-col:last-child {
     direction: ltr;
-    padding-left: 30px;
+    position: relative;
+    left: 30px;
 }
 
 .bell {
@@ -610,52 +612,40 @@ a.ant-typography:hover, .ant-typography a:hover {
 
 .exam-page-row > .ant-col:first-child {
     width: 200px;
+    background-color: white;
+    border-left: 1px solid #eaedf0;
 }
 
 .exam-page-row .ant-col:first-child ul {
     height: 100%;
     position: relative;
-    right: -1px;
     text-align: right;
-    border-left: 1px solid #eaedf0;
     direction: ltr;
-    padding-top: 15px;
+    margin-top: 20px;
 }
 
-.exam-menu li:first-child {
-    padding: 0;
-    margin-bottom: 15px !important;
-}
-
-.exam-menu li:first-child {
-    background-color: unset !important;
-}
-
-.exam-menu li:first-child:after {
-    display: none;
-}
-
-.exam-menu li:first-child button {
-    padding: 0 0 5px 5px;
+.go-to-add-question-btn button {
+    padding: 0 5px 5px 5px;
     direction: rtl;
     height: 38px;
     width: 130px;
     margin-right: 32px;
     box-shadow: none;
+    margin-top: 20px;
 }
 
-.exam-menu li:not(:first-child) svg {
+.go-to-add-question-btn button svg {
+    font-size: 19px;
+    position: relative;
+    top: 4px;
+    left: 5px;
+}
+
+.exam-menu li svg {
     font-size: 18px;
     position: relative;
     top: 4px;
     margin-left: 15px;
-}
-
-.exam-menu li:first-child button svg {
-    position: relative;
-    top: 4px;
-    left: 5px;
-    font-size: 19px;
 }
 
 .exam-menu .ant-menu-item {
@@ -690,7 +680,7 @@ a.ant-typography:hover, .ant-typography a:hover {
     right: -1px;
 }
 
-.exam-page-row .ant-col:last-child .ant-row:first-child h1 {
+.pages-heading {
     font-size: 25px;
     font-weight: bold;
     margin-bottom: 30px;
@@ -701,18 +691,18 @@ a.ant-typography:hover, .ant-typography a:hover {
     direction: rtl;
 }
 
-.exam-page-row .path > a {
+ .path > a {
     color: #8697A8;
     margin-left: 5px;
     position: relative;
     bottom: 3px;
 }
 
-.exam-page-row .path > a:last-child {
+.path > a:last-child {
     color: #343A40;
 }
 
-.exam-page-row .path span[role='img'] {
+.path span[role='img'] {
     margin-left: 5px;
     color: #8697A8;
 }
@@ -788,7 +778,7 @@ a.ant-typography:hover, .ant-typography a:hover {
     display: flex;
 }
 
-pre {
+.question-content p {
     direction: rtl;
     float: right;
     margin-block-end: auto;
@@ -910,6 +900,8 @@ pre {
     width: 8px;
     height: 8px;
     border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
     display: inline-table;
     content: "";
     position: absolute;
@@ -960,20 +952,29 @@ pre {
     overflow: hidden;
 }
 
-.exam-page-row > .ant-col:last-child::-webkit-scrollbar {
+/*custom scrollbar*/
+.exam-page-row > .ant-col:last-child::-webkit-scrollbar,
+.edit-page::-webkit-scrollbar,
+.manage-exam::-webkit-scrollbar {
     width: 5px;
     border-radius: 3px;
 }
 
-.exam-page-row > .ant-col:last-child::-webkit-scrollbar-track {
+.exam-page-row > .ant-col:last-child::-webkit-scrollbar-track,
+.edit-page::-webkit-scrollbar-track,
+.manage-exam::-webkit-scrollbar-track {
     border-radius: 3px;
 }
 
-.exam-page-row > .ant-col:last-child::-webkit-scrollbar-thumb {
+.exam-page-row > .ant-col:last-child::-webkit-scrollbar-thumb,
+.edit-page::-webkit-scrollbar-thumb,
+.manage-exam::-webkit-scrollbar-thumb {
     background: transparent;
 }
 
-.exam-page-row > .ant-col:last-child:hover::-webkit-scrollbar-thumb {
+.exam-page-row > .ant-col:last-child:hover::-webkit-scrollbar-thumb,
+.edit-page:hover::-webkit-scrollbar-thumb,
+.manage-exam:hover::-webkit-scrollbar-thumb {
     background: #0081FF;
     border-radius: 3px;
 }
@@ -999,7 +1000,7 @@ pre {
     width: 150px;
 }
 
-.ant-collapse-borderless pre {
+.ant-collapse-borderless p {
     width: 100%;
     padding: 0 30px;
     position: relative;
@@ -1122,7 +1123,8 @@ span[aria-label='close'] {
 }
 
 .ant-modal-close-x:hover, .ant-modal-close-x:focus,
-.ant-notification-notice-close:hover, .ant-notification-notice-close:focus {
+.ant-notification-notice-close:hover, .ant-notification-notice-close:focus,
+.remove-question-btn:hover, .remove-question-btn:focus {
     outline: none;
     color: #fff;
     background-color: #FF3D57;
@@ -1133,12 +1135,17 @@ span[aria-label='close'] > svg {
     font-size: 14px;
 }
 
-.success {
+.success,
+.error {
     width: 300px;
     direction: rtl;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
+}
+
+.error {
+    padding: 12px 20px;
 }
 
 .ant-notification-notice-close {
@@ -1167,7 +1174,7 @@ span[aria-label='close'] > svg {
     transform: translate(-52%, -50%);
 }
 
-.ant-notification-notice-icon span[role='img'] {
+.success .ant-notification-notice-icon span[role='img'] {
     top: 55%;
 }
 
@@ -1175,8 +1182,12 @@ span[aria-label='close'] > svg {
     font-size: 22px;
 }
 
-.ant-notification-notice-icon svg {
+.success .ant-notification-notice-icon svg {
     font-size: 25px;
+}
+
+.error .ant-notification-notice-icon svg {
+    font-size: 33px;
 }
 
 .success .ant-notification-notice-icon {
@@ -1189,6 +1200,18 @@ span[aria-label='close'] > svg {
     color: white;
     right: 20px;
     bottom: 12px;
+}
+
+.error .ant-notification-notice-icon {
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    background-color: #FF3D57;
+    color: white;
+    right: 15px;
+    bottom: 21px;
 }
 
 .success .ant-notification-notice-with-icon .ant-notification-notice-message {
@@ -1210,11 +1233,27 @@ span[aria-label='close'] > svg {
     right: 0;
 }
 
+.error:after {
+    content: '';
+    width: 0;
+    height: 75px;
+    border: 2px solid #FF3D57;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.ant-notification-notice-with-icon .ant-notification-notice-message {
+    margin-right: 25px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
 .counter {
     width: 160px;
     height: 50px;
-    position: relative;
-    bottom: 80px;
+    position: absolute;
+    bottom: 8%;
     background-color: #22CCE220;
     margin: 0 19px;
     border-radius: 5px;
@@ -1223,14 +1262,321 @@ span[aria-label='close'] > svg {
     border: 1px solid #1BBDFE70;
     padding: 13px 7px 12px 2px;
     font-size: 13px;
+    color: #1BBDFE;
 }
 
-.counter .bi-check-square {
+.disabled-counter {
+    width: 160px;
+    height: 50px;
+    position: absolute;
+    bottom: 8%;
+    background-color: #22CCE220;
+    margin: 0 19px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border: 1px solid #1BBDFE70;
+    padding: 13px 15px 12px 2px;
+    font-size: 13px;
+    color: #1BBDFE;
+    opacity: 0.5;
+    cursor: auto;
+    transition: .5s;
+}
+
+.counter .bi-check-square,
+.disabled-counter .bi-check-square {
     font-size: 17px;
     position: relative;
     top: 2px;
 }
 
-.counter > span:nth-child(2) {
-    margin: 0 5px;
+.counter > span:first-child,
+.disabled-counter > span:first-child {
+    margin-left: 5px;
+}
+
+.counter > span:last-child,
+.disabled-counter > span:last-child {
+    position: relative;
+    right: 5px;
+}
+
+/*edit page classes*/
+.edit-page {
+    width: 100%;
+    padding: 35px 15px 25px 15px;
+    overflow: scroll;
+    height: 100%;
+    overflow-x: hidden;
+    direction: ltr;
+    position: relative;
+    right: -1px;
+}
+
+.edit-page > .ant-row:first-child {
+    display: block;
+    direction: rtl;
+    width: 100%;
+    height: fit-content;
+}
+
+.edit-page-trash-arrow {
+    direction: ltr;
+}
+
+.edit-page-trash-arrow span {
+    background-color: #B0BBC650;
+    margin-left: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    cursor: pointer;
+    color: #343A40 !important;
+}
+
+.edit-page-trash-arrow svg {
+    font-size: 22px;
+    position: relative;
+    top: 9px;
+}
+
+.tooltip {
+    font-size: 12px;
+    margin-bottom: 0;
+}
+
+.edit-page .ant-row:first-child h1 {
+    margin-bottom: 15px;
+}
+
+.edit-page .all-questions-header {
+    margin-top: 40px;
+}
+
+.edit-page > .ant-row:first-child .path {
+    padding-top: 17px;
+}
+
+.edit-page .questions {
+    width: 100%;
+    display: block;
+    margin-top: 45px;
+}
+
+.edit-page .question-content:hover p {
+    margin-right: 10px;
+}
+
+.remove-question-btn {
+    padding: 0;
+    border: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    color: #44566C;
+    background-color: #E9ECEF;
+    opacity: 0;
+    transition: .5s;
+    position: relative;
+    bottom: 5px;
+}
+
+.edit-page .question-content:hover .remove-question-btn {
+    opacity: 1;
+    transition: .5s;
+}
+
+.remove-question-btn > span {
+    position: relative;
+    top: 1px;
+}
+
+.remove-question-btn svg {
+    font-size: 23px;
+}
+
+.edit-page .all-questions-header .ant-select,
+.edit-page .all-questions-header .ant-input-search {
+    height: 32px;
+}
+
+.edit-page .all-questions-header > a {
+    margin-right: 10px;
+}
+
+.edit-page .all-questions-header > a button {
+    padding: 0;
+    border: 0;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    position: relative;
+    bottom: 7px;
+    background-color: #007BFF;
+    color: white;
+    box-shadow: 0 5px 10px #007BFF16, 0 15px 40px #007BFF16;
+}
+
+.edit-page .all-questions-header > a button:hover {
+    color: #FFFFFF;
+    box-shadow: 0 2px 8px 0 #007BFF90;
+    background-color: #007BFF;
+    border: none;
+
+}
+
+.edit-page .all-questions-header > a button svg {
+    font-size: 31px;
+    position: relative;
+    top: 3px;
+}
+
+.ant-modal-close-x .bi {
+    font-size: 22px;
+    top: -7px;
+    position: relative;
+
+}
+
+.edit-submit-modal {
+    width: 400px !important;
+}
+
+.edit-submit-modal .ant-modal-title {
+    width: fit-content;
+    font-weight: bold;
+    font-size: 19px;
+    position: relative;
+    top: 3px;
+}
+
+.edit-submit-modal .ant-modal-content {
+    direction: rtl;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+
+.edit-submit-modal .ant-modal-content > button {
+    right: unset;
+    left: 0;
+}
+
+.edit-submit-modal .ant-modal-header {
+    border: none;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+
+.edit-submit-modal .ant-modal-body {
+    padding-bottom: 0;
+    padding-top: 5px;
+}
+
+.edit-submit-modal label {
+    font-size: 14px;
+    color: #343A40;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.edit-submit-modal .ant-form-item:last-child label {
+    display: inline;
+    margin-left: 10px;
+    margin-bottom: 0 !important;
+}
+
+.edit-submit-modal .ant-col-14 {
+    max-width: 100%;
+}
+
+.edit-submit-modal .ant-modal-body .ant-form-item:last-child {
+    margin-bottom: 0;
+}
+
+.edit-submit-modal input,
+.edit-submit-modal textarea {
+    border: 0;
+    background-color: #F8FAFB;
+    height: 35px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+.ant-input-number-sm:first-child {
+    margin-right: 60px;
+}
+
+.edit-submit-modal .ant-input-number {
+    border: none;
+    margin-left: 10px;
+    width: 70px;
+}
+
+.edit-submit-modal .ant-input-number:first-child {
+    margin-right: 60px;
+}
+
+.edit-submit-modal input[role='spinbutton'] {
+    text-align: center;
+    font-size: 13px;
+}
+
+.edit-submit-modal input[role='spinbutton']:hover {
+    text-align: left;
+}
+
+.edit-submit-modal .ant-modal-footer {
+    border-top: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.edit-submit-modal .ant-modal-footer > button {
+    margin-right: 190px;
+    margin-left: 15px;
+    font-size: 13px;
+    height: 30px;
+    border: 1px solid #1BBDFE70;
+    color: #1BBDFE;
+}
+
+.edit-submit-modal .ant-modal-footer > a > button {
+    height: 30px;
+    font-size: 13px;
+    box-shadow: none;
+    width: 78px;
+}
+
+.second {
+    margin-right: 60px !important;
+}
+
+/*manage-exam classes*/
+.manage-exam {
+    width: 100%;
+    padding: 35px 15px 25px 15px;
+    overflow: scroll;
+    height: 100%;
+    overflow-x: hidden;
+    direction: ltr;
+    position: relative;
+    right: -1px;
+}
+.manage-exam > .ant-row:first-child {
+    display: block;
+    direction: rtl;
+    width: 100%;
+    height: fit-content;
+}
+.manage-exam .all-questions-header {
+    width: 100%;
+    margin-top: 0;
 }

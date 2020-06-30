@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import 'antd/dist/antd.css';
 import '../App.css';
-import {Layout, Menu, Avatar, Row, Col, Button, Popover, Badge} from 'antd';
+import {Layout, Avatar, Row, Col, Button, Popover, Badge} from 'antd';
 import {UserOutlined} from '@ant-design/icons';
 import {
     OpenSidebarIcon,
@@ -15,14 +15,16 @@ import SidebarItems from "../componenets/sider-menu";
 import AllQuestionPageMenuItems from "./exam-menu";
 import {Route} from "react-router-dom";
 import Exam from "./exam";
-import SubMenu from "antd/es/menu/SubMenu";
+import EditExam from "./edit-exam";
 import {connect} from "react-redux";
+import ManageExam from "./manage-exam";
 
 const {Header, Sider, Content} = Layout;
 
+
 const UserContent = (
     <div>
-        <Link to=''>خروج</Link>
+        <Link>خروج</Link>
     </div>
 );
 const EventContent = (
@@ -36,8 +38,8 @@ const MassageContent = (
     </div>
 );
 
-class BaseLayout extends React.Component {
 
+class BaseLayout extends React.Component {
 
     constructor(props) {
         super(props);
@@ -52,10 +54,16 @@ class BaseLayout extends React.Component {
                 mode: 'inline',
                 theme: 'light',
             }
+        }else {
+            this.state = {
+            collapsed: false,
+            mode: 'inline',
+            theme: 'light',
+        };
         }
     }
 
-
+    // click on sidebar items
     closeSider = () => {
         if (window.location.pathname === "/teacher/exam") {
             this.setState({
@@ -68,13 +76,21 @@ class BaseLayout extends React.Component {
         }
     };
 
-
+    // toggle sidebar when click on menu icon
     toggle = () => {
         this.setState({
             collapsed: !this.state.collapsed,
         });
     };
 
+    // make sidebar open in edit page (khodam drawerd !!!!!!!!!!!)
+    componentWillReceiveProps() {
+        if (window.location.pathname === '/teacher/exam/edit_exam') {
+            this.setState({
+                collapsed: false,
+            })
+        }
+    }
 
     render() {
         return (
@@ -124,7 +140,7 @@ class BaseLayout extends React.Component {
                             }}>
                         </Content>
                     </Route>
-                    <Route path="/teacher/exam">
+                    <Route exact path="/teacher/exam">
                         <Content
                             className="site-layout-background"
                             style={{
@@ -140,11 +156,36 @@ class BaseLayout extends React.Component {
                             </Row>
                         </Content>
                     </Route>
+                    <Route path="/teacher/exam/edit_exam">
+                        <Content
+                            onClick={this.closeSider}
+                            className="site-layout-background"
+                            style={{
+                                minHeight: 280,
+                            }}>
+                            <Row className="edit-page">
+                                <EditExam/>
+                            </Row>
+                        </Content>
+                    </Route>
+                    <Route path="/teacher/manage_exam">
+                        <Content
+                            className="site-layout-background"
+                            style={{
+                                minHeight: 280,
+                            }}>
+                            <Row className='manage-exam'>
+                                <ManageExam/>
+                            </Row>
+                        </Content>
+                    </Route>
                 </Layout>
             </Layout>
         );
     }
+
 }
+
 
 const mapStateToProps = state => {
     return {

@@ -1,12 +1,16 @@
 import React from "react";
-import {MenuIcon,
-        PlusIcon,
-        UserIcon,
-        CheckedIcon
+import {
+    MenuIcon,
+    PlusIcon,
+    UserIcon,
+    CheckedIcon,
+    ExclamationIcon,
+    XIcon
 } from "../componenets/icons";
-import {Menu, Button, Row} from 'antd';
+import {Menu, Button, Row, notification} from 'antd';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux"
+
 
 const mapStateToProps = state => {
     return {
@@ -16,28 +20,36 @@ const mapStateToProps = state => {
 };
 
 class AllQuestionPageMenuItems extends React.Component {
-    constructor(props) {
-        super(props);
-        if (this.props.count === "") {
-            this.state = {
-                display : 'none'
-            }
-        }
-    }
+
+    openNotification = () => {
+        notification.error({
+            message: 'خطا',
+            description: 'سوالی انتخاب نشده است !',
+            duration: 3,
+            placement: 'bottomLeft',
+            icon: ExclamationIcon(),
+            closeIcon: XIcon(),
+            className: 'error'
+        })
+    };
+
+    handleDisabledCounter = (e) => {
+        this.openNotification();
+        e.preventDefault();
+    };
+
     render() {
         return (
             <>
+                <Link className='go-to-add-question-btn' onChange={this.u}>
+                    <Button type="primary" icon={<PlusIcon/>}>
+                        افزودن سوال
+                    </Button>
+                </Link>
                 <Menu className="exam-menu"
                       mode="inline"
                       theme="light"
                       defaultSelectedKeys={['1']}>
-                    <Menu.Item>
-                        <Link>
-                            <Button type="primary" icon={<PlusIcon/>}>
-                                افزودن سوال
-                            </Button>
-                        </Link>
-                    </Menu.Item>
                     <Menu.Item key="1" icon={<MenuIcon/>}>
                         <Link to="/teacher/exam">
                             <span>همه ی سوالات</span>
@@ -54,23 +66,27 @@ class AllQuestionPageMenuItems extends React.Component {
                     <Menu.Item key="4">
                         <Link>
                             <span>سوالات شما</span>
-                            {/*<span>{this.props.pack_pk} </span>*/}
-                            {/*<span> {this.props.count}</span>*/}
                         </Link>
                     </Menu.Item>
                 </Menu>
-                <Link>
-                    <Row className='counter'>
-                            <CheckedIcon/>
-                            <span>سوالات انتخاب شده</span>
-                            <span className={this.props.count === 0  ? "no-event" : ""}>({this.props.count})</span>
-                    </Row>
+                <Link
+                    to='/teacher/exam/edit_exam'
+                    onClick={this.props.count === 0 ? this.handleDisabledCounter : null}
+                    className={this.props.count === 0 ? 'disabled-counter' : 'counter'}
+                >
+                    <CheckedIcon/>
+                    <span>
+                            سوالات انتخاب شده
+                        </span>
+                    <span
+                        className={this.props.count === 0 ? "no-event" : ""}
+                    >
+                            ({this.props.count})
+                    </span>
                 </Link>
             </>
         );
     }
 }
-
-
 
 export default connect(mapStateToProps)(AllQuestionPageMenuItems);

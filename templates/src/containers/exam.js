@@ -4,7 +4,6 @@ import {
     HouseIcon,
     ChevronLeftIcon,
     ThreeDotIcon,
-    ChartIcon,
     XIcon,
     CheckIcon
 } from "../componenets/icons";
@@ -23,6 +22,9 @@ import {getQuestion, getQuestionApi} from "../store/actions/teacher";
 import {connect} from "react-redux";
 import axios from "axios";
 import {updatePackApi} from "../store/actions";
+import {ChartModal} from "../componenets/modals";
+
+
 
 const {Option} = Select;
 
@@ -41,20 +43,29 @@ const text = `
   لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
 `;
 
-
 class Exam extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             minValue: 0,
             maxValue: 10,
-            unit: 10
+            unit: 10,
         };
     }
+
+
+    getPaginationUnit = (value) => {
+        this.setState({
+            unit: value,
+        }, function () {
+            this.props.getQuestionApi(0, this.state.unit);
+        });
+    };
 
     componentDidMount() {
         this.props.getQuestionApi(this.state.minValue, this.state.maxValue);
     }
+
 
     // pagination
     handleChange = value => {
@@ -77,8 +88,8 @@ class Exam extends React.Component {
     handleCheckbox = e => {
         console.log(e.target.checked);
         console.log(e.target.id);
-        if ( e.target.checked === true) {
-            this.props.updatePackApi(e.target.id , 'add');
+        if (e.target.checked === true) {
+            this.props.updatePackApi(e.target.id, 'add');
             notification.success({
                 description:
                     'سوال با موفقیت اضافه شد .',
@@ -89,7 +100,7 @@ class Exam extends React.Component {
                 className: 'success',
             });
         } else {
-            this.props.updatePackApi(e.target.id , 'remove');
+            this.props.updatePackApi(e.target.id, 'remove');
             notification.success({
                 description:
                     'سوال با موفقیت حذف شد .',
@@ -125,11 +136,12 @@ class Exam extends React.Component {
         });
     };
 
+
     render() {
         return (
             <>
                 <Row>
-                    <h1>همه ی سوالات<span></span></h1>
+                    <h1 className='pages-heading'>همه ی سوالات<span>()</span></h1>
                     <Row className="path">
                         <HouseIcon/>
                         <ChevronLeftIcon/>
@@ -139,10 +151,12 @@ class Exam extends React.Component {
                     </Row>
                     <Row className="all-questions-header">
                         <span>نمایش</span>
-                        <Select defaultValue="3" style={{width: 60}}>
-                            <Option value="1">1</Option>
-                            <Option value="2">2</Option>
-                            <Option value="3">3</Option>
+                        <Select defaultValue='10' style={{width: 60}} onChange={this.getPaginationUnit}>
+                            <Option value="10">10</Option>
+                            <Option value="15">15</Option>
+                            <Option value="20">20</Option>
+                            <Option value="25">25</Option>
+                            <Option value="30">30</Option>
                         </Select>
                         <Select defaultValue="سخت به ساده" style={{width: 125}}>
                             <Option value="ساده به سخت">ساده به سخت</Option>
@@ -169,9 +183,7 @@ class Exam extends React.Component {
                                         <Col>
                                             <span className='question-level simple'>{val.level}</span>
                                             <span>
-                                        <Button type="primary" onClick={this.showModal}>
-                                            <ChartIcon/>
-                                        </Button>
+                                        <ChartModal/>
                                         <Modal
                                             visible={this.state.visible}
                                             onOk={this.handleOk}
@@ -181,38 +193,37 @@ class Exam extends React.Component {
                                         </Modal>
                                     </span>
                                             <span>
-                                    <Dropdown overlay={menu}>
-                                        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                                            <ThreeDotIcon/>
-                                        </a>
-                                    </Dropdown>
-                                </span>
-                                    </Col>
-                                </Row>
-                                <Row className="question-content">
-                                    <Checkbox onChange={this.handleCheckbox} id={val.id}>
-                                    </Checkbox>
-                                    <pre> {val.questionContent}</pre>
-                                    <Row className="inline-choices">
-                                        <span>1)<span className="choice-amount">{val.firstChoice}</span></span>
-                                        <span>2)<span className="choice-amount">{val.secondChoice}</span></span>
-                                        <span className='correct-choice'>3)<span
-                                            className="choice-amount">{val.thirdChoice}</span></span>
-                                        <span>4)<span className="choice-amount">{val.fourthChoice}</span></span>
+                                        <Dropdown overlay={menu}>
+                                            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                                                <ThreeDotIcon/>
+                                            </a>
+                                        </Dropdown>
+                                    </span>
+                                        </Col>
                                     </Row>
-                                    <span className="question-img"><img src={val.questionImg} alt="kanoon"/></span>
-                                </Row>
-                            </Card>
-                            <Collapse
-                                bordered={false}
-                                className="site-collapse-custom-collapse"
-                            >
-                                <Panel header="پاسخ تشریحی" key="1" className="site-collapse-custom-panel">
-                                    <pre>{val.verboseAns}</pre>
-                                </Panel>
-                            </Collapse>
-                        </Row>
-                    ))}
+                                    <Row className="question-content">
+                                        <Checkbox onChange={this.handleCheckbox} id={val.id}></Checkbox>
+                                        <p> {val.questionContent}</p>
+                                        <Row className="inline-choices">
+                                            <span>1)<span className="choice-amount">{val.firstChoice}</span></span>
+                                            <span>2)<span className="choice-amount">{val.secondChoice}</span></span>
+                                            <span className='correct-choice'>3)<span
+                                                className="choice-amount">{val.thirdChoice}</span></span>
+                                            <span>4)<span className="choice-amount">{val.fourthChoice}</span></span>
+                                        </Row>
+                                        <span className="question-img"><img src={val.questionImg} alt="kanoon"/></span>
+                                    </Row>
+                                </Card>
+                                <Collapse
+                                    bordered={false}
+                                    className="site-collapse-custom-collapse"
+                                >
+                                    <Panel header="پاسخ تشریحی" key="1" className="site-collapse-custom-panel">
+                                        <pre>{val.verboseAns}</pre>
+                                    </Panel>
+                                </Collapse>
+                            </Row>
+                        ))}
                     <Pagination
                         total={this.props.count}
                         showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
